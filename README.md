@@ -16,8 +16,7 @@ iDrug-Software-Development-Course/
 ├── database/             Django migrations 与数据库初始化说明
 ├── need_review/          暂无未分类代码，仅保留说明
 ├── README.md
-├── .gitignore
-└── 整理说明.md
+└── .gitignore
 ```
 
 ## 后端运行说明
@@ -51,7 +50,7 @@ http://127.0.0.1:8000/
 
 ## 模型文件说明
 
-模型代码位于 `model/`。由于模型权重文件较大，未上传至 GitHub，可通过部署环境或课程提交压缩包提供。被排除的权重类型包括 `.pt`、`.pth`、`.ckpt`、`.bin`、`.safetensors`、`.h5`、`.pkl` 等。
+模型代码位于 `model/`。由于模型权重文件较大，未上传至 GitHub。
 
 后端中的 `backend/web/prediction_model_services.py` 会从仓库根目录下的 `model/` 读取推理脚本和模型目录。运行真实预测前，请按 `model/README_MODEL.md` 补齐对应 checkpoints 文件。
 
