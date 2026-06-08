@@ -14,7 +14,6 @@ iDrug-Software-Development-Course/
 ├── frontend/             Django 页面文件、CSS、图片等前端页面资源
 ├── model/                DTI 模型推理代码、模型调用说明和权重占位说明
 ├── database/             Django migrations 与数据库初始化说明
-├── need_review/          暂无未分类代码，仅保留说明
 ├── README.md
 └── .gitignore
 ```
