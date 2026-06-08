@@ -1,0 +1,128 @@
+{
+  "save_id": "demo_631_multiscenario_prediction",
+  "saved_at": "2026-05-16T09:35:00",
+  "user_name": "demo",
+  "demo_record": true,
+  "result_payload": {
+    "demo_record": true,
+    "demo_title": "6.3.1 Multi-scenario prediction function test demo",
+    "demo_section": "6.3.1 Multi-scenario prediction function test",
+    "personalization_applied": false,
+    "task_type": "multi_scenario_prediction_demo",
+    "task_label": "Multi-scenario DTI Prediction",
+    "input_sample": {
+      "drug_smiles": "CC(=O)OC1=CC=CC=C1C(=O)OCC1=CC2=C(S1)NC3=CC=CC=C3N=C2N4CCN(CC4)C",
+      "protein_sequence": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR"
+    },
+    "patient_profile": {
+      "age": null,
+      "sex": "unknown",
+      "disease_history": [],
+      "allergy_history": [],
+      "insurance_preference": "no"
+    },
+    "drug": [
+      {
+        "drugx_id": "DEMO_SMILES_001",
+        "drug_name": "Input Drug SMILES",
+        "iupac_name": "Input Drug SMILES",
+        "smiles": "CC(=O)OC1=CC=CC=C1C(=O)OCC1=CC2=C(S1)NC3=CC=CC=C3N=C2N4CCN(CC4)C",
+        "metadata_status": {
+          "level": "compound_only",
+          "label": "Structure-only results",
+          "message": "The demo uses the report sample input rather than a curated drug metadata record."
+        }
+      }
+    ],
+    "protein": [
+      {
+        "protein_id": "REPORT_SAMPLE_PROTEIN",
+        "seq": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR"
+      }
+    ],
+    "prob": [
+      {
+        "task_type": "drug_repositioning",
+        "task_label": "Drug Repositioning",
+        "model": "HyperAttentionDTI Human",
+        "pred_prob": 0.873
+      },
+      {
+        "task_type": "novel_target_screening",
+        "task_label": "Novel Target Screening",
+        "model": "HyperAttentionDTI GPCR",
+        "pred_prob": 0.812
+      },
+      {
+        "task_type": "new_drug_evaluation",
+        "task_label": "New Drug Evaluation",
+        "model": "PSICHIC",
+        "pred_prob": 0.768
+      },
+      {
+        "task_type": "affinity_prediction",
+        "task_label": "Affinity Prediction",
+        "model": "DeepDTA GPCR",
+        "pred_prob": 0.826
+      }
+    ],
+    "ranked_results": [
+      {
+        "personalized_rank": 1,
+        "original_rank": 1,
+        "drug_name": "Drug Repositioning",
+        "pubchem_cid": "N/A",
+        "dti_score_raw": 0.873,
+        "final_score": 0.873,
+        "metadata_status": {
+          "level": "compound_only",
+          "label": "Structure-only results",
+          "message": "Demo prediction result for the report sample input."
+        },
+        "recommendation_reason": "The report sample input is submitted to the drug repositioning task and returns a high interaction score."
+      },
+      {
+        "personalized_rank": 2,
+        "original_rank": 2,
+        "drug_name": "Affinity Prediction",
+        "pubchem_cid": "N/A",
+        "dti_score_raw": 0.826,
+        "final_score": 0.826,
+        "metadata_status": {
+          "level": "compound_only",
+          "label": "Structure-only results",
+          "message": "Demo prediction result for the report sample input."
+        },
+        "recommendation_reason": "DeepDTA returns a positive affinity prediction for the same drug-protein pair."
+      },
+      {
+        "personalized_rank": 3,
+        "original_rank": 3,
+        "drug_name": "Novel Target Screening",
+        "pubchem_cid": "N/A",
+        "dti_score_raw": 0.812,
+        "final_score": 0.812,
+        "metadata_status": {
+          "level": "compound_only",
+          "label": "Structure-only results",
+          "message": "Demo prediction result for the report sample input."
+        },
+        "recommendation_reason": "The same sample input can be routed to the novel target screening task through the unified prediction API."
+      },
+      {
+        "personalized_rank": 4,
+        "original_rank": 4,
+        "drug_name": "New Drug Evaluation",
+        "pubchem_cid": "N/A",
+        "dti_score_raw": 0.768,
+        "final_score": 0.768,
+        "metadata_status": {
+          "level": "compound_only",
+          "label": "Structure-only results",
+          "message": "Demo prediction result for the report sample input."
+        },
+        "recommendation_reason": "PSICHIC produces the new-drug evaluation score for the report sample input."
+      }
+    ]
+  }
+}

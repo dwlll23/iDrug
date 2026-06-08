@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDrug - Saved Results</title>
+    <link rel="shortcut icon" href="{% static 'Source/drugTitle.png' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+    <style>
+        body { margin: 0; background: #f4f7fb; color: #243746; font-family: "Microsoft YaHei", sans-serif; }
+        .hero-shell { position: relative; padding: 58px 0 34px; background: radial-gradient(circle at top right, rgba(107, 143, 220, 0.16), transparent 34%), linear-gradient(180deg, #f8fbff 0%, #edf3fb 100%); color: #22324a; border-bottom: 1px solid rgba(219, 228, 241, 0.72); }
+        .hero-inner, .page-shell { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+        .hero-kicker, .hero-chip { display: inline-flex; border-radius: 999px; border: 1px solid #dbe4f1; }
+        .hero-kicker { padding: 8px 14px; background: rgba(255,255,255,0.12); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+        .hero-title { margin: 18px 0 12px; font-size: 34px; line-height: 1.15; font-weight: 700; }
+        .hero-text { max-width: none; width: 100%; margin: 0; line-height: 1.9; color: #6b7a90; font-size: 15px; }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+        .hero-chip { padding: 8px 14px; background: #f7faff; color: #6b7a90; font-size: 13px; border: 1px solid #dbe4f1;}
+        .page-shell { padding-top: 28px; padding-bottom: 56px; }
+        .section-title { margin: 0 0 10px; font-size: 28px; color: #20364a; }
+        .section-text { margin: 0 0 24px; color: #637381; line-height: 1.85; }
+        .panel-card { border: 0; border-radius: 22px; overflow: hidden; box-shadow: 0 16px 40px rgba(15, 42, 61, 0.08); }
+        .highlight-tip { margin-bottom: 16px; }
+        .subtle { color: #909399; font-size: 13px; }
+        .action-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .el-table .highlight-row > td { background: #fdf6ec !important; }
+    </style>
+</head>
+<body>
+<div id="savedListApp">
+    <header class="header_home">
+        <h2 class="Logo">iDrug</h2>
+        <nav class="navigation">
+            <a href="/home.html">Home</a>
+            <a href="/plat_DTI_input.html">Recommend</a>
+            <a href="/prediction_models.html">Models</a>
+            <a href="/Function.html">Explore</a>
+            <a href="/data_sources.html">Data</a>
+            <a href="/userInfo.html" class="active">Profile</a>
+            <a href="/tutorial.html">Tutorial</a>
+        </nav>
+        <div class="Login">
+            <el-button v-if="currentUserName" type="text" @click="goUserInfo">User Center</el-button>
+            <el-button v-else type="text" @click="goLogin">Sign In</el-button>
+        </div>
+    </header>
+
+    <section class="hero-shell">
+        <div class="hero-inner">
+            <div class="hero-kicker">Saved Results</div>
+            <h1 class="hero-title">Saved Results</h1>
+            <p class="hero-text">This page lists the DTI prediction records saved by the current user. You can review the save time, personalization status, result size, and status summary before opening the full detail page.</p>
+            <div class="hero-meta">
+                <div class="hero-chip">Current User: [[ currentUserName || 'Guest' ]]</div>
+                <div class="hero-chip">Record Count: [[ results.length ]]</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-shell">
+        <h2 class="section-title">History</h2>
+        <p class="section-text">Use this page to quickly review saved records and identify whether a result contains structure-only entries or limited metadata.</p>
+
+        <div class="action-row">
+            <div class="subtle">All saved prediction records for the current user are listed here.</div>
+            <el-button type="primary" plain @click="goUserInfo">Back to User Center</el-button>
+        </div>
+
+        <el-card shadow="hover" class="panel-card">
+            <div slot="header">Saved Record List</div>
+            <el-alert v-if="highlightSaveId" class="highlight-tip" title="The newly saved record is highlighted below." type="success" show-icon :closable="false"></el-alert>
+            <div v-if="loading" class="subtle">Loading saved records...</div>
+            <div v-else-if="results.length === 0" class="subtle">No saved results are available for the current user.</div>
+            <el-table v-else :data="results" border stripe style="width: 100%" :row-class-name="tableRowClassName">
+                <el-table-column prop="save_id" label="Save ID" min-width="220"></el-table-column>
+                <el-table-column prop="saved_at" label="Saved At" min-width="180"></el-table-column>
+                <el-table-column label="Type" width="90" align="center">
+                    <template slot-scope="scope">
+                        <el-tag v-if="scope.row.is_demo" type="info" size="mini">Demo</el-tag>
+                        <span v-else>Saved</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="personalization_applied" label="Personalized" width="100" align="center">
+                    <template slot-scope="scope">[[ scope.row.personalization_applied ? 'Enabled' : 'Disabled' ]]</template>
+                </el-table-column>
+                <el-table-column prop="drug_count" label="Drug Count" width="90" align="center"></el-table-column>
+                <el-table-column prop="protein_count" label="Protein Count" width="90" align="center"></el-table-column>
+                <el-table-column prop="ranked_count" label="Rank Count" width="90" align="center"></el-table-column>
+                <el-table-column label="Status Summary" width="160" align="center">
+                    <template slot-scope="scope">
+                        <el-tag :type="statusSummaryTagType(scope.row.status_summary && scope.row.status_summary.level)" size="mini">[[ statusSummaryLabel(scope.row) ]]</el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column label="Actions" width="180" align="center">
+                    <template slot-scope="scope">
+                        <el-button type="text" @click="openDetail(scope.row.save_id)">View Detail</el-button>
+                        <el-button v-if="!scope.row.is_demo" type="text" style="color:#f56c6c" @click="deleteResult(scope.row.save_id)">Delete</el-button>
+                        <el-tag v-else type="info" size="mini">Locked</el-tag>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-card>
+    </div>
+</div>
+
+<script>
+new Vue({
+    el: '#savedListApp',
+    delimiters: ['[[', ']]'],
+    data() {
+        return { loading: true, results: [], highlightSaveId: '', currentUserName: sessionStorage.getItem('userName') || '' };
+    },
+    created() {
+        const search = new URLSearchParams(window.location.search);
+        this.highlightSaveId = search.get('highlight') || '';
+        this.loadCurrentUser();
+        this.fetchResults();
+    },
+    methods: {
+        loadCurrentUser() {
+            axios.get('/api/current-user/').then((response) => {
+                const user = (response.data && response.data.user) || {};
+                const username = user.username || '';
+                this.currentUserName = username;
+                if (username) sessionStorage.setItem('userName', username);
+                else sessionStorage.removeItem('userName');
+            }).catch(() => {
+                this.currentUserName = '';
+                sessionStorage.removeItem('userName');
+                sessionStorage.removeItem('loginTime');
+            });
+        },
+        fetchResults() {
+            if (!sessionStorage.getItem('userName')) {
+                window.location.href = '/login.html';
+                return;
+            }
+            axios.get('/api/saved-recommendations/').then((resp) => {
+                const payload = resp.data || {};
+                this.results = payload.results || [];
+            }).catch((error) => {
+                console.error('Failed to load saved results', error);
+                if (error.response && error.response.status === 401) {
+                    this.$message.warning('Please sign in before viewing saved results.');
+                    window.location.href = '/login.html';
+                } else {
+                    this.$message.error('Failed to load saved results. Please try again later.');
+                }
+            }).finally(() => {
+                this.loading = false;
+            });
+        },
+        openDetail(saveId) { window.location.href = `/saved_result_detail.html?save_id=${encodeURIComponent(saveId)}`; },
+        deleteResult(saveId) {
+            this.$confirm('Are you sure you want to delete this saved result?', 'Delete Confirmation', {
+                confirmButtonText: 'Delete',
+                cancelButtonText: 'Cancel',
+                type: 'warning'
+            }).then(() => axios.post(`/api/saved-recommendations/${encodeURIComponent(saveId)}/delete/`))
+            .then(() => {
+                this.$message.success('Saved result deleted successfully.');
+                if (this.highlightSaveId === saveId) {
+                    this.highlightSaveId = '';
+                }
+                this.results = this.results.filter((item) => item.save_id !== saveId);
+            }).catch((error) => {
+                if (error === 'cancel' || (error && error.message === 'cancel')) {
+                    return;
+                }
+                const response = error && error.response;
+                const message = response && response.data && response.data.message
+                    ? response.data.message
+                    : 'Failed to delete the saved result.';
+                this.$message.error(message);
+            });
+        },
+        goUserInfo() { window.location.href = '/userInfo.html'; },
+        goLogin() { window.location.href = '/login.html'; },
+        statusSummaryTagType(level) { if (level === 'full') return 'success'; if (level === 'compound_only') return 'warning'; return 'info'; },
+        statusSummaryLabel(row) { return (row && row.status_summary && row.status_summary.label) || 'Insufficient Information'; },
+        tableRowClassName({ row }) { return this.highlightSaveId && row.save_id === this.highlightSaveId ? 'highlight-row' : ''; }
+    }
+});
+</script>
+</body>
+</html>
+
+
+
+

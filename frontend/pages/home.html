@@ -1,0 +1,508 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iDrug - Home</title>
+  <link rel="shortcut icon" href="{% static 'Source/drugTitle.png' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="{% static 'css/Swiper.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+  <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+
+  <style>
+    .banner .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .banner .hero-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .banner .hero-actions .primary-btn {
+      background: #17335d;
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(23, 51, 93, 0.18);
+    }
+
+    .banner .hero-actions .secondary-btn {
+      background: rgba(255, 255, 255, 0.9);
+      color: #17335d;
+      border: 1px solid #dbe4f1;
+    }
+
+    .banner .hero-actions a:hover {
+      transform: translateY(-1px);
+    }
+
+    .module-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .module-card-link .item,
+    .module-card-link .module-item {
+      transition: all 0.22s ease;
+      cursor: pointer;
+    }
+
+    .module-card-link:hover .item,
+    .module-card-link:hover .module-item {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px rgba(59, 87, 126, 0.12);
+    }
+
+    .module-tag {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #eef4fc;
+      color: #6b7fa2;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .service .module-grid,
+    .introduce .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .service .module-grid > [class*="col-"],
+    .introduce .module-grid > [class*="col-"] {
+      width: 100% !important;
+      max-width: 100%;
+      float: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .service .module-grid .item,
+    .introduce .module-grid .item {
+      min-height: 210px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 26px 24px;
+      box-shadow: none;
+    }
+
+    .service .module-grid .item h4,
+    .introduce .module-grid .item h4 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.3;
+      color: #22324a;
+      font-weight: 700;
+    }
+
+    .service .module-grid .item p,
+    .introduce .module-grid .item p {
+      margin: 0;
+      color: #6b7a90;
+      line-height: 1.9;
+      font-size: 15px;
+    }
+
+    .service .module-grid .item .module-open,
+    .introduce .module-grid .item .module-open {
+      margin-top: 18px;
+      color: #6b8fdc;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .architecture-layout {
+      display: flex;
+      align-items: stretch;
+      gap: 28px;
+      margin-top: 18px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .architecture-figure {
+      flex: 0 0 58%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      min-height: 420px;
+    }
+
+    .architecture-figure img {
+      max-width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .architecture-copy {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #22324a;
+    }
+
+    .architecture-copy h4 {
+      margin: 0 0 14px;
+      color: #22324a;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .architecture-copy p {
+      margin: 0 0 14px;
+      color: #6b7a90;
+      font-size: 15px;
+      line-height: 1.82;
+    }
+
+    .architecture-points {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .architecture-points li {
+      color: #6b7a90;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    
+
+    .hero-image {
+        width: 100%;
+        max-width: 560px;
+        height: 320px;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 18px;
+        background: transparent;
+      }
+
+    [v-cloak] {
+      display: none;
+    }
+
+    @media (max-width: 991px) {
+      .architecture-layout {
+        flex-direction: column;
+      }
+
+      .architecture-figure {
+        min-height: 260px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<div id="app">
+  <header class="header_home">
+    <h2 class="Logo">iDrug</h2>
+    <nav class="navigation">
+      <a href="/home.html" class="active">Home</a>
+      <a href="/plat_DTI_input.html">Recommend</a>
+      <a href="/prediction_models.html">Models</a>
+      <a href="/Function.html">Explore</a>
+      <a href="/data_sources.html">Data</a>
+      <a href="/userInfo.html">Profile</a>
+      <a href="/tutorial.html">Tutorial</a>
+    </nav>
+    <div class="Login">
+      <el-button v-if="userName_login !== 'Guest'" type="text" @click="userExit">Sign Out</el-button>
+      <el-button v-else type="text" @click="goLogin">Sign In</el-button>
+    </div>
+  </header>
+
+  <div class="banner wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+    <div class="wid">
+      <div class="intrs">
+        <div class="text fl">
+          <div class="tits">iDrug</div>
+          <div class="txts">
+            Multi-scenario DTI Prediction and Personalized Drug Recommendation Support Platform. iDrug is an upgraded platform built for multi-scenario drug-target interaction prediction and personalized drug recommendation support. It combines scenario-specific DTI workflows, structured drug and protein knowledge, and patient-aware reranking to provide lightweight, explainable assistance for drug discovery and medication decision support.
+          </div>
+          <div class="hero-actions">
+            <a href="/plat_DTI_input.html" class="primary-btn">Get Started</a>
+            <a href="/tutorial.html" class="secondary-btn">Watch Tutorial</a>
+          </div>
+        </div>
+                <video class="indexVideo hero-image" autoplay muted loop playsinline preload="metadata">
+                  <source src="{% static 'idrug.mp4' %}" type="video/mp4">
+                </video>
+        </div>
+      <div class="swiper-container list swiper-container-initialized swiper-container-horizontal"></div>
+      <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+    </div>
+  </div>
+
+  <div class="service">
+    <div class="wid">
+      <div class="title wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+        Core Modules
+      </div>
+      <div class="text wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+        <p>Explore the major workflows of iDrug through personalized recommendation, task-based prediction, structured query, data browsing, and guided learning.</p>
+      </div>
+
+      <div class="row module-grid wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <a href="/plat_DTI_input.html" class="module-card-link">
+            <div class="item module-item">
+              <span class="module-tag">Recommend</span>
+              <h4>Personalized Recommendation</h4>
+              <p>Generate patient-aware drug recommendations by combining DTI-based prediction with age, sex, disease history, allergy history, and insurance-related reranking.</p>
+              <div class="module-open">Open Recommend →</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <a href="/prediction_models.html" class="module-card-link">
+            <div class="item module-item">
+              <span class="module-tag">Models</span>
+              <h4>Prediction Models</h4>
+              <p>Run multi-scenario DTI workflows for drug repositioning, novel target screening, new drug evaluation, and affinity prediction through a task-oriented prediction workspace.</p>
+              <div class="module-open">Open Models →</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <a href="/Function.html" class="module-card-link">
+            <div class="item module-item">
+              <span class="module-tag">Explore</span>
+              <h4>Explore</h4>
+              <p>Browse drug, protein, and complex information through local-first query workflows, including compound lookup, protein lookup, and 3D complex visualization.</p>
+              <div class="module-open">Open Explore →</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="introduce">
+    <div class="wid">
+      <div class="intr">
+        <div class="tits wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+          <h3>More Platform Workspaces</h3>
+          <h5>Continue from prediction and query workflows into structured data browsing, result management, and guided onboarding.</h5>
+        </div>
+      </div>
+
+      <div class="row module-grid wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <a href="/data_sources.html" class="module-card-link">
+            <div class="item module-item">
+              <span class="module-tag">Data</span>
+              <h4>Data Sources</h4>
+              <p>View the structured local datasets and external reference sources that support prediction, recommendation, metadata matching, and information exploration.</p>
+              <div class="module-open">Open Data →</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <a href="/userInfo.html" class="module-card-link">
+            <div class="item module-item">
+              <span class="module-tag">Profile</span>
+              <h4>Profile</h4>
+              <p>Review saved results, revisit historical recommendation records, and manage personal prediction outputs through the user profile workspace.</p>
+              <div class="module-open">Open Profile →</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <a href="/tutorial.html" class="module-card-link">
+            <div class="item module-item">
+              <span class="module-tag">Tutorial</span>
+              <h4>Tutorial</h4>
+              <p>Follow the guided platform walkthrough with screenshots and step-by-step instructions to quickly understand the main workflows of iDrug.</p>
+              <div class="module-open">Open Tutorial →</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="inform">
+    <div class="wid">
+      <div class="intr">
+        <div class="tits wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+          <h3>Platform Architecture</h3>
+        </div>
+      </div>
+
+      <div class="architecture-layout wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+        <div class="architecture-figure">
+          <img src="/pic/kj.png" alt="Platform architecture">
+        </div>
+        <div class="architecture-copy">
+          <p>iDrug adopts a three-layer architecture:</p>
+          <ul class="architecture-points">
+            <li>
+              <strong>Base Layer 1: Multi-scenario DTI Prediction</strong>
+              Supports drug repositioning, target screening, drug evaluation, and affinity prediction through task-specific models.
+            </li>
+            <li>
+              <strong>Base Layer 2: Knowledge Query</strong>
+              Provides structured drug, protein, and complex information with support for 3D visualization.
+            </li>
+            <li>
+              <strong>Core Layer: Personalized Recommendation</strong>
+              Re-ranks candidate drugs with patient-specific features and outputs interpretable results.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template>
+    <el-backtop :bottom="100" :right="50" :visibility-height="1000">
+      Top
+    </el-backtop>
+  </template>
+
+  <div class="footer">
+    <div class="first">
+      <a href="/home.html">@2026 iDrug</a>
+    </div>
+    <div class="vect">
+      <a href="/home.html">Home</a>
+      <a href="/plat_DTI_input.html">Recommend</a>
+      <a href="/Function.html">Explore</a>
+      <a href="/userInfo.html">Profile</a>
+    </div>
+    <div class="Us">
+      <div>Contact Us</div>
+      <div>Mail: drugxplatform@163.com</div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/wow.min.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/swiper.min.js' %}"></script>
+<script src="{% static 'js/Epp-2.1.1.min.js' %}"></script>
+
+<script>
+  if (window.Swiper) {
+    new Swiper('.banner .list', {
+      pagination: {
+        el: '.banner .list .swiper-pagination',
+        clickable: true,
+      },
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+    });
+  }
+
+  new Vue({
+    el: '#app',
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+        userName_login: 'Guest',
+      };
+    },
+    created() {
+      this.loadCurrentUser();
+    },
+    methods: {
+      loadCurrentUser() {
+        axios.get('/api/current-user/').then((response) => {
+          const user = (response.data && response.data.user) || {};
+          const username = user.username || '';
+          if (username) {
+            this.userName_login = username;
+            sessionStorage.setItem('userName', username);
+            return;
+          }
+          this.userName_login = 'Guest';
+          sessionStorage.removeItem('userName');
+        }).catch(() => {
+          this.userName_login = 'Guest';
+          sessionStorage.removeItem('userName');
+          sessionStorage.removeItem('loginTime');
+        });
+      },
+      goLogin() {
+        window.location.href = '/login.html';
+      },
+      userExit() {
+        fetch('/logout/', {
+          method: 'POST',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        }).finally(() => {
+          sessionStorage.removeItem('userName');
+          sessionStorage.removeItem('loginTime');
+          window.location.href = '/home.html';
+        });
+      }
+    },
+  })
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

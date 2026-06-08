@@ -1,0 +1,136 @@
+{
+  "save_id": "demo_632_structure_query",
+  "saved_at": "2026-05-16T09:45:00",
+  "user_name": "demo",
+  "demo_record": true,
+  "result_payload": {
+    "demo_record": true,
+    "demo_title": "6.3.2 Structure query and visualization function test demo",
+    "demo_section": "6.3.2 Structure query and visualization test",
+    "personalization_applied": false,
+    "task_type": "structure_query_demo",
+    "task_label": "Drug/Protein/Complex Query",
+    "patient_profile": {
+      "age": null,
+      "sex": "unknown",
+      "disease_history": [],
+      "allergy_history": [],
+      "insurance_preference": "no"
+    },
+    "drug": [
+      {
+        "drugx_id": "61",
+        "drug_name": "Diphosphoglyceric acid",
+        "iupac_name": "Diphosphoglyceric acid",
+        "smiles": "C(C(C(=O)O)OP(=O)(O)O)OP(=O)(O)O",
+        "molecular_formula": "C3H8O10P2",
+        "molecular_weight": "266.04",
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "Matched local cid_smiles_map.csv record for CID 61."
+        }
+      }
+    ],
+    "protein": [
+      {
+        "protein_id": "4HHB",
+        "pdb_id": "4HHB",
+        "protein_name": "Hemoglobin subunit beta",
+        "uniprot_id": "P68871",
+        "seq": "VHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH"
+      },
+      {
+        "protein_id": "5IMT",
+        "pdb_id": "5IMT",
+        "protein_name": "Intermedilysin",
+        "uniprot_id": "Q9LCB8",
+        "seq": "GGSHHHHHHGMASMTGGQQMGRDLYDDDDKDRWGSETPTKPKAAQTEKKPEKKPENSNSEAAKKALNDYIWGLQYDKL"
+      }
+    ],
+    "structure_queries": [
+      {
+        "query_type": "Drug",
+        "input": "CID 61",
+        "result": "Diphosphoglyceric acid",
+        "source": "cid_smiles_map.csv",
+        "visual_resource": "PubChem 2D structure URL"
+      },
+      {
+        "query_type": "Protein",
+        "input": "PDB 4HHB",
+        "result": "Hemoglobin subunit beta",
+        "source": "pdb_protein_map.csv",
+        "visual_resource": "https://cdn.rcsb.org/images/structures/4hhb_assembly-1.jpeg"
+      },
+      {
+        "query_type": "Complex",
+        "input": "PDB 5IMT",
+        "result": "Intermedilysin metal-bound complex",
+        "source": "pdb_complex_map.csv",
+        "visual_resource": "/pic/5IMT.png"
+      }
+    ],
+    "prob": [
+      {
+        "query_type": "Drug",
+        "input": "CID 61",
+        "status": "ready"
+      },
+      {
+        "query_type": "Protein",
+        "input": "PDB 4HHB",
+        "status": "ready"
+      },
+      {
+        "query_type": "Complex",
+        "input": "PDB 5IMT",
+        "status": "ready"
+      }
+    ],
+    "ranked_results": [
+      {
+        "personalized_rank": 1,
+        "original_rank": 1,
+        "drug_name": "Drug query: CID 61",
+        "pubchem_cid": "61",
+        "dti_score_raw": 1.0,
+        "final_score": 1.0,
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "CID 61 is available in the local drug structure data."
+        },
+        "recommendation_reason": "The local drug data returns Diphosphoglyceric acid with SMILES, formula C3H8O10P2, and molecular weight 266.04."
+      },
+      {
+        "personalized_rank": 2,
+        "original_rank": 2,
+        "drug_name": "Protein query: PDB 4HHB",
+        "pubchem_cid": "N/A",
+        "dti_score_raw": 1.0,
+        "final_score": 1.0,
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "PDB 4HHB is available in the local protein map."
+        },
+        "recommendation_reason": "The protein query returns Hemoglobin subunit beta, UniProt P68871, and the RCSB structure image URL."
+      },
+      {
+        "personalized_rank": 3,
+        "original_rank": 3,
+        "drug_name": "Complex query: PDB 5IMT",
+        "pubchem_cid": "N/A",
+        "dti_score_raw": 1.0,
+        "final_score": 1.0,
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "PDB 5IMT is available in the local complex map."
+        },
+        "recommendation_reason": "The complex query returns Intermedilysin metal-bound complex and uses /pic/5IMT.png for local visualization."
+      }
+    ]
+  }
+}

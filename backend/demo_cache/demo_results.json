@@ -1,0 +1,741 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "pm_drug_repositioning_aspirin_insulin",
+      "section": "prediction_models",
+      "title": "Drug Repositioning - Aspirin and insulin fragment",
+      "match": {
+        "task_type": "drug_repositioning",
+        "drug_input": "CC(=O)OC1=CC=CC=C1C(=O)O",
+        "protein_input": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR"
+      },
+      "response": {
+        "task_type": "drug_repositioning",
+        "task_label": "Drug Repositioning",
+        "status": "ok",
+        "message": "Demo cache hit: HyperAttentionDTI drug repositioning result.",
+        "result_items": [
+          {
+            "rank": 1,
+            "drug_input": "CC(=O)OC1=CC=CC=C1C(=O)O",
+            "protein_input": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR",
+            "raw_score": 0.742,
+            "pred_label": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pm_drug_repositioning_losartan_hemoglobin",
+      "section": "prediction_models",
+      "title": "Drug Repositioning - Losartan and hemoglobin beta",
+      "match": {
+        "task_type": "drug_repositioning",
+        "drug_input": "CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+        "protein_input": "VHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH"
+      },
+      "response": {
+        "task_type": "drug_repositioning",
+        "task_label": "Drug Repositioning",
+        "status": "ok",
+        "message": "Demo cache hit: HyperAttentionDTI drug repositioning result.",
+        "result_items": [
+          {
+            "rank": 1,
+            "drug_input": "CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+            "protein_input": "VHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH",
+            "raw_score": 0.684,
+            "pred_label": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pm_novel_target_montelukast_gpcr",
+      "section": "prediction_models",
+      "title": "Novel Target Screening - Montelukast and GPCR-like sequence",
+      "match": {
+        "task_type": "novel_target_screening",
+        "drug_input": "CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O",
+        "protein_input": "MSNTSSTDIHTGLTSSNSSLPYNLTVATVSVGLAGACAVVGLVGNGLVVLVT"
+      },
+      "response": {
+        "task_type": "novel_target_screening",
+        "task_label": "Novel Target Screening",
+        "status": "ok",
+        "message": "Demo cache hit: HyperAttentionDTI novel target screening result.",
+        "result_items": [
+          {
+            "rank": 1,
+            "drug_input": "CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O",
+            "protein_input": "MSNTSSTDIHTGLTSSNSSLPYNLTVATVSVGLAGACAVVGLVGNGLVVLVT",
+            "raw_score": 0.817,
+            "pred_label": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pm_novel_target_famotidine_insulin",
+      "section": "prediction_models",
+      "title": "Novel Target Screening - Famotidine and insulin fragment",
+      "match": {
+        "task_type": "novel_target_screening",
+        "drug_input": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N",
+        "protein_input": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR"
+      },
+      "response": {
+        "task_type": "novel_target_screening",
+        "task_label": "Novel Target Screening",
+        "status": "ok",
+        "message": "Demo cache hit: HyperAttentionDTI novel target screening result.",
+        "result_items": [
+          {
+            "rank": 1,
+            "drug_input": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N",
+            "protein_input": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR",
+            "raw_score": 0.531,
+            "pred_label": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pm_new_drug_report_sample",
+      "section": "prediction_models",
+      "title": "New Drug Evaluation - report sample",
+      "match": {
+        "task_type": "new_drug_evaluation",
+        "drug_input": "CC(=O)OC1=CC=CC=C1C(=O)OCC1=CC2=C(S1)NC3=CC=CC=C3N=C2N4CCN(CC4)C",
+        "protein_input": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR"
+      },
+      "response": {
+        "task_type": "new_drug_evaluation",
+        "task_label": "New Drug Evaluation",
+        "status": "ok",
+        "message": "Demo cache hit: PSICHIC new drug evaluation result.",
+        "result_items": [
+          {
+            "rank": 1,
+            "drug_input": "CC(=O)OC1=CC=CC=C1C(=O)OCC1=CC2=C(S1)NC3=CC=CC=C3N=C2N4CCN(CC4)C",
+            "protein_input": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR",
+            "raw_score": 0.793,
+            "pred_label": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pm_new_drug_metformin_hemoglobin",
+      "section": "prediction_models",
+      "title": "New Drug Evaluation - Metformin and hemoglobin beta",
+      "match": {
+        "task_type": "new_drug_evaluation",
+        "drug_input": "CN(C)C(=N)N=C(N)N",
+        "protein_input": "VHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH"
+      },
+      "response": {
+        "task_type": "new_drug_evaluation",
+        "task_label": "New Drug Evaluation",
+        "status": "ok",
+        "message": "Demo cache hit: PSICHIC new drug evaluation result.",
+        "result_items": [
+          {
+            "rank": 1,
+            "drug_input": "CN(C)C(=N)N=C(N)N",
+            "protein_input": "VHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH",
+            "raw_score": 0.612,
+            "pred_label": "1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pm_affinity_ibuprofen_insulin",
+      "section": "prediction_models",
+      "title": "Affinity Prediction - Ibuprofen and insulin fragment",
+      "match": {
+        "task_type": "affinity_prediction",
+        "drug_input": "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O",
+        "protein_input": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR"
+      },
+      "response": {
+        "task_type": "affinity_prediction",
+        "task_label": "Affinity Prediction",
+        "status": "ok",
+        "message": "Demo cache hit: DeepDTA affinity prediction result.",
+        "result_items": [
+          {
+            "rank": 1,
+            "drug_input": "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O",
+            "protein_input": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR",
+            "raw_score": 0.438,
+            "pred_label": "N/A"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pm_affinity_atorvastatin_hemoglobin",
+      "section": "prediction_models",
+      "title": "Affinity Prediction - Atorvastatin and hemoglobin beta",
+      "match": {
+        "task_type": "affinity_prediction",
+        "drug_input": "CC(C)C1=C(C(=C(N1CCC(CC(CC(=O)O)O)O)C2=CC=C(C=C2)F)C3=CC=CC=C3)C(=O)NC4=CC=CC=C4",
+        "protein_input": "VHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH"
+      },
+      "response": {
+        "task_type": "affinity_prediction",
+        "task_label": "Affinity Prediction",
+        "status": "ok",
+        "message": "Demo cache hit: DeepDTA affinity prediction result.",
+        "result_items": [
+          {
+            "rank": 1,
+            "drug_input": "CC(C)C1=C(C(=C(N1CCC(CC(CC(=O)O)O)O)C2=CC=C(C=C2)F)C3=CC=CC=C3)C(=O)NC4=CC=CC=C4",
+            "protein_input": "VHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH",
+            "raw_score": 0.721,
+            "pred_label": "N/A"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dti_user_a_baseline",
+      "section": "dti_recommendation",
+      "title": "Personalized Recommendation - user A baseline",
+      "match": {
+        "input1": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR",
+        "input2": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N\nCC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O\nCCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+        "age": 45,
+        "sex": "unknown",
+        "disease_history": ["none"],
+        "allergy_history": ["none"],
+        "insurance_preference": "no"
+      },
+      "response": {
+        "drug": [
+          {
+            "drugx_id": "5702160",
+            "drug_name": "Famotidine",
+            "molecular_formula": "C8H15N7O2S3",
+            "molecular_weight": "337.5",
+            "iupac_name": "Famotidine",
+            "xlogp": "",
+            "rotatable_bond_count": "",
+            "url_": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/5702160/PNG/?record_type=2d&size=500x500&bgcolor=white",
+            "canonical_smiles": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N",
+            "isomeric_smiles": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N",
+            "smiles": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          },
+          {
+            "drugx_id": "5281040",
+            "drug_name": "Montelukast",
+            "molecular_formula": "C35H36ClNO3S",
+            "molecular_weight": "586.2",
+            "iupac_name": "Montelukast",
+            "xlogp": "",
+            "rotatable_bond_count": "",
+            "url_": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/5281040/PNG/?record_type=2d&size=500x500&bgcolor=white",
+            "canonical_smiles": "CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O",
+            "isomeric_smiles": "CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O",
+            "smiles": "CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          },
+          {
+            "drugx_id": "3961",
+            "drug_name": "Losartan",
+            "molecular_formula": "C22H23ClN6O",
+            "molecular_weight": "422.9",
+            "iupac_name": "Losartan",
+            "xlogp": "",
+            "rotatable_bond_count": "",
+            "url_": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/3961/PNG/?record_type=2d&size=500x500&bgcolor=white",
+            "canonical_smiles": "CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+            "isomeric_smiles": "CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+            "smiles": "CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          }
+        ],
+        "protein": [
+          {
+            "pdb_id": "SEQ_1",
+            "protein_id": "SEQ_1",
+            "uniprot_id": "",
+            "source": "sequence",
+            "seq": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR",
+            "deposit_date": "NOT APPLICABLE",
+            "release_date": "NOT APPLICABLE",
+            "molecular_weight": "NOT APPLICABLE",
+            "nonpolymer_bound_components": "NOT APPLICABLE",
+            "pdbx_keywords": "PROTEIN SEQUENCE INPUT",
+            "image_url": "/pic/5IMT.png"
+          }
+        ],
+        "prob": [0.74, 0.82, 0.86],
+        "personalization_applied": true,
+        "patient_profile": {
+          "age": 45,
+          "sex": "unknown",
+          "disease_history": ["none"],
+          "allergy_history": ["none"],
+          "insurance_preference": "no"
+        },
+        "ranked_results": [
+          {
+            "personalized_rank": 1,
+            "original_rank": 1,
+            "drug_name": "Losartan",
+            "pubchem_cid": "3961",
+            "dti_score_raw": 0.86,
+            "recommendation_reason": "Baseline profile: ranking follows the original DTI score order.",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          },
+          {
+            "personalized_rank": 2,
+            "original_rank": 2,
+            "drug_name": "Montelukast",
+            "pubchem_cid": "5281040",
+            "dti_score_raw": 0.82,
+            "recommendation_reason": "Baseline profile: no additional disease or allergy constraints were applied.",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          },
+          {
+            "personalized_rank": 3,
+            "original_rank": 3,
+            "drug_name": "Famotidine",
+            "pubchem_cid": "5702160",
+            "dti_score_raw": 0.74,
+            "recommendation_reason": "Baseline profile: raw DTI score remains the main ranking factor.",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "dti_user_b_ulcer_depression",
+      "section": "dti_recommendation",
+      "title": "Personalized Recommendation - user B ulcer and depression",
+      "match": {
+        "input1": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR",
+        "input2": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N\nCC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O\nCCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+        "age": 45,
+        "sex": "unknown",
+        "disease_history": ["ulcer", "depression"],
+        "allergy_history": ["none"],
+        "insurance_preference": "no"
+      },
+      "response": {
+        "drug": [
+          {
+            "drugx_id": "5702160",
+            "drug_name": "Famotidine",
+            "molecular_formula": "C8H15N7O2S3",
+            "molecular_weight": "337.5",
+            "iupac_name": "Famotidine",
+            "xlogp": "",
+            "rotatable_bond_count": "",
+            "url_": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/5702160/PNG/?record_type=2d&size=500x500&bgcolor=white",
+            "canonical_smiles": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N",
+            "isomeric_smiles": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N",
+            "smiles": "C1=C(N=C(S1)N=C(N)N)CSCCC(=NS(=O)(=O)N)N",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          },
+          {
+            "drugx_id": "5281040",
+            "drug_name": "Montelukast",
+            "molecular_formula": "C35H36ClNO3S",
+            "molecular_weight": "586.2",
+            "iupac_name": "Montelukast",
+            "xlogp": "",
+            "rotatable_bond_count": "",
+            "url_": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/5281040/PNG/?record_type=2d&size=500x500&bgcolor=white",
+            "canonical_smiles": "CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O",
+            "isomeric_smiles": "CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O",
+            "smiles": "CC(C)(C1=CC=CC=C1CCC(C2=CC=CC(=C2)C=CC3=NC4=C(C=CC(=C4)Cl)C=C3)SCC5(CC5)CC(=O)O)O",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          },
+          {
+            "drugx_id": "3961",
+            "drug_name": "Losartan",
+            "molecular_formula": "C22H23ClN6O",
+            "molecular_weight": "422.9",
+            "iupac_name": "Losartan",
+            "xlogp": "",
+            "rotatable_bond_count": "",
+            "url_": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/3961/PNG/?record_type=2d&size=500x500&bgcolor=white",
+            "canonical_smiles": "CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+            "isomeric_smiles": "CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+            "smiles": "CCCCC1=NC(=C(N1CC2=CC=C(C=C2)C3=CC=CC=C3C4=NNN=N4)CO)Cl",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          }
+        ],
+        "protein": [
+          {
+            "pdb_id": "SEQ_1",
+            "protein_id": "SEQ_1",
+            "uniprot_id": "",
+            "source": "sequence",
+            "seq": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR",
+            "deposit_date": "NOT APPLICABLE",
+            "release_date": "NOT APPLICABLE",
+            "molecular_weight": "NOT APPLICABLE",
+            "nonpolymer_bound_components": "NOT APPLICABLE",
+            "pdbx_keywords": "PROTEIN SEQUENCE INPUT",
+            "image_url": "/pic/5IMT.png"
+          }
+        ],
+        "prob": [0.74, 0.82, 0.86],
+        "personalization_applied": true,
+        "patient_profile": {
+          "age": 45,
+          "sex": "unknown",
+          "disease_history": ["ulcer", "depression"],
+          "allergy_history": ["none"],
+          "insurance_preference": "no"
+        },
+        "ranked_results": [
+          {
+            "personalized_rank": 1,
+            "original_rank": 3,
+            "drug_name": "Famotidine",
+            "pubchem_cid": "5702160",
+            "dti_score_raw": 0.74,
+            "recommendation_reason": "Matched ulcer-related preference, so the ranking is promoted under the user profile.",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          },
+          {
+            "personalized_rank": 2,
+            "original_rank": 1,
+            "drug_name": "Losartan",
+            "pubchem_cid": "3961",
+            "dti_score_raw": 0.86,
+            "recommendation_reason": "Strong raw DTI score keeps this candidate in the top group.",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          },
+          {
+            "personalized_rank": 3,
+            "original_rank": 2,
+            "drug_name": "Montelukast",
+            "pubchem_cid": "5281040",
+            "dti_score_raw": 0.82,
+            "recommendation_reason": "Depression is listed as a caution tag, so this candidate is lowered after personalization.",
+            "metadata_status": {
+              "level": "full",
+              "label": "Full Metadata",
+              "message": "Matched local personalization metadata."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "legacy_recommend_hypertension_male_60",
+      "section": "personalized_recommend",
+      "title": "Legacy personalized recommend - hypertension",
+      "match": {
+        "disease": "hypertension",
+        "age": 60,
+        "gender": "Male"
+      },
+      "response": {
+        "status": "success",
+        "code": "SUCCESS",
+        "request_params": {
+          "disease": "hypertension",
+          "age": 60,
+          "gender": "Male"
+        },
+        "count": 3,
+        "recommendations": [
+          {
+            "rank": 1,
+            "drug": "Losartan",
+            "reason": "Commonly used antihypertensive option in the local demo rule set.",
+            "price": "medium",
+            "medicare": "unknown",
+            "usage": "Follow clinician guidance.",
+            "priority": 1,
+            "match_age_range": "Unlimited",
+            "match_gender": "Any"
+          },
+          {
+            "rank": 2,
+            "drug": "Metformin",
+            "reason": "Shown as a comorbidity-aware comparison item for demo display.",
+            "price": "low",
+            "medicare": "unknown",
+            "usage": "Follow clinician guidance.",
+            "priority": 2,
+            "match_age_range": "Unlimited",
+            "match_gender": "Any"
+          },
+          {
+            "rank": 3,
+            "drug": "Atorvastatin",
+            "reason": "Shown as a cardiovascular-risk comparison item for demo display.",
+            "price": "medium",
+            "medicare": "unknown",
+            "usage": "Follow clinician guidance.",
+            "priority": 3,
+            "match_age_range": "Unlimited",
+            "match_gender": "Any"
+          }
+        ]
+      }
+    },
+    {
+      "id": "legacy_recommend_ulcer_any_45",
+      "section": "personalized_recommend",
+      "title": "Legacy personalized recommend - ulcer",
+      "match": {
+        "disease": "ulcer",
+        "age": 45,
+        "gender": "Any"
+      },
+      "response": {
+        "status": "success",
+        "code": "SUCCESS",
+        "request_params": {
+          "disease": "ulcer",
+          "age": 45,
+          "gender": "Any"
+        },
+        "count": 3,
+        "recommendations": [
+          {
+            "rank": 1,
+            "drug": "Famotidine",
+            "reason": "Matched ulcer-related condition in the demo rule set.",
+            "price": "low",
+            "medicare": "unknown",
+            "usage": "Follow clinician guidance.",
+            "priority": 1,
+            "match_age_range": "Unlimited",
+            "match_gender": "Any"
+          },
+          {
+            "rank": 2,
+            "drug": "Omeprazole",
+            "reason": "Shown as a gastrointestinal-condition comparison item for demo display.",
+            "price": "low",
+            "medicare": "unknown",
+            "usage": "Follow clinician guidance.",
+            "priority": 2,
+            "match_age_range": "Unlimited",
+            "match_gender": "Any"
+          },
+          {
+            "rank": 3,
+            "drug": "Losartan",
+            "reason": "Shown as a non-GI comparison item after personalization.",
+            "price": "medium",
+            "medicare": "unknown",
+            "usage": "Follow clinician guidance.",
+            "priority": 3,
+            "match_age_range": "Unlimited",
+            "match_gender": "Any"
+          }
+        ]
+      }
+    },
+    {
+      "id": "structure_drug_cid_61",
+      "section": "structure_query",
+      "title": "Drug query - CID 61",
+      "match": {
+        "kind": "drug",
+        "selectOp": "2",
+        "inputText": "61"
+      },
+      "response": {
+        "drugx_id": "61",
+        "drug_name": "Diphosphoglyceric acid",
+        "molecular_formula": "C3H8O10P2",
+        "molecular_weight": "266.04",
+        "iupac_name": "Diphosphoglyceric acid",
+        "xlogp": "",
+        "rotatable_bond_count": "",
+        "url_": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/61/PNG/?record_type=2d&size=500x500&bgcolor=white",
+        "canonical_smiles": "C(C(C(=O)O)OP(=O)(O)O)OP(=O)(O)O",
+        "isomeric_smiles": "C(C(C(=O)O)OP(=O)(O)O)OP(=O)(O)O",
+        "smiles": "C(C(C(=O)O)OP(=O)(O)O)OP(=O)(O)O"
+      }
+    },
+    {
+      "id": "structure_drug_smiles_aspirin",
+      "section": "structure_query",
+      "title": "Drug query - Aspirin SMILES",
+      "match": {
+        "kind": "drug",
+        "selectOp": "1",
+        "inputText": "CC(=O)OC1=CC=CC=C1C(=O)O"
+      },
+      "response": {
+        "drugx_id": "2244",
+        "drug_name": "Aspirin",
+        "molecular_formula": "C9H8O4",
+        "molecular_weight": "180.16",
+        "iupac_name": "Aspirin",
+        "xlogp": "",
+        "rotatable_bond_count": "",
+        "url_": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/2244/PNG/?record_type=2d&size=500x500&bgcolor=white",
+        "canonical_smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+        "isomeric_smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+        "smiles": "CC(=O)OC1=CC=CC=C1C(=O)O"
+      }
+    },
+    {
+      "id": "structure_protein_pdb_4hhb",
+      "section": "structure_query",
+      "title": "Protein query - PDB 4HHB",
+      "match": {
+        "kind": "protein",
+        "selectOp": "1",
+        "inputText": "4HHB"
+      },
+      "response": {
+        "pdb_id": "4HHB",
+        "uniprot_id": "P68871",
+        "protein_name": "Hemoglobin subunit beta",
+        "source": "demo_cache",
+        "query_status": "ok",
+        "data_status": "full",
+        "seq": "VHLTPEEKSAVTALWGKVNVDEVGGEALGRLLVVYPWTQRFFESFGDLSTPDAVMGNPKVKAHGKKVLGAFSDGLAHLDNLKGTFATLSELHCDKLHVDPENFRLLGNVLVCVLAHHFGKEFTPPVQAAYQKVVAGVANALAHKYH",
+        "deposit_date": "NOT FOUND",
+        "release_date": "NOT FOUND",
+        "molecular_weight": "64.74",
+        "nonpolymer_bound_components": "HEM",
+        "pdbx_keywords": "OXYGEN TRANSPORT",
+        "image_url": "https://cdn.rcsb.org/images/structures/4hhb_assembly-1.jpeg",
+        "image_source": "rcsb"
+      }
+    },
+    {
+      "id": "structure_protein_pdb_5imt",
+      "section": "structure_query",
+      "title": "Protein query - PDB 5IMT",
+      "match": {
+        "kind": "protein",
+        "selectOp": "1",
+        "inputText": "5IMT"
+      },
+      "response": {
+        "pdb_id": "5IMT",
+        "uniprot_id": "Q9LCB8",
+        "protein_name": "Intermedilysin",
+        "source": "demo_cache",
+        "query_status": "ok",
+        "data_status": "full",
+        "seq": "GGSHHHHHHGMASMTGGQQMGRDLYDDDDKDRWGSETPTKPKAAQTEKKPEKKPENSNSEAAKKALNDYIWGLQYDKLNILTHQGEKLKNHSSREAFHRPGEYVVIEKKKQSISNATSKLSVSSANDDRIFPGALLKADQSLLENLPTLIPVNRGKTTISVNLPGLKNGESNLTVENPSNSTVRTAVNNLVEKWIQNYSKTHAVPARMQYESISAQSMSQLQAKFGADFSKVGAPLNVDFSSVHKGEKQVFIANFRQVYYTASVDSPNSPSALFGSGITPTDLINRGVNSKTPPVYVSNVSYGRAMYVKFETTSKSTKVQAAIDAVVKGAKLKAGTEYENILKNTKICAVVLGGNPGEASKVCTGNIDTLKDLIQKGSNFSAQSPAVPISYTTSFVKDNSIATIQNNTDYIETKVTSYKDGALTLNHDGAFVARFYVYWEELGHDAEGYETIRSRSWSGNGYNRGAHYSTTLRFKGNVRNIRVKVLGATGLAWEPWRLIYSKNDLPLVPQRNISTWGTTLHPQFEDKVVKDNTD",
+        "deposit_date": "2015-06-25",
+        "release_date": "2015-09-23",
+        "molecular_weight": "68.89",
+        "nonpolymer_bound_components": "CU, ZN",
+        "pdbx_keywords": "TOXIN",
+        "image_url": "/pic/5IMT.png",
+        "image_source": "local"
+      }
+    },
+    {
+      "id": "structure_complex_5imt",
+      "section": "structure_query",
+      "title": "Complex query - PDB 5IMT",
+      "match": {
+        "kind": "complex",
+        "selectOp": "",
+        "inputText": "5IMT"
+      },
+      "response": {
+        "pdb_id": "5IMT",
+        "title": "Intermedilysin metal-bound complex",
+        "protein_name": "Intermedilysin",
+        "uniprot_id": "Q9LCB8",
+        "ligand_ids": "CU;ZN",
+        "ligand_names": "Copper ion;Zinc ion",
+        "bound_components": "CU, ZN",
+        "experimental_method": "X-RAY DIFFRACTION",
+        "resolution": "2.90",
+        "keywords": "TOXIN",
+        "image_url": "/pic/5IMT.png",
+        "structure_file_url": "https://files.rcsb.org/download/5IMT.cif",
+        "source": "demo_cache",
+        "query_status": "ok",
+        "data_status": "full"
+      }
+    },
+    {
+      "id": "structure_complex_4hhb",
+      "section": "structure_query",
+      "title": "Complex query - PDB 4HHB",
+      "match": {
+        "kind": "complex",
+        "selectOp": "",
+        "inputText": "4HHB"
+      },
+      "response": {
+        "pdb_id": "4HHB",
+        "title": "Hemoglobin heme complex",
+        "protein_name": "Hemoglobin subunit beta",
+        "uniprot_id": "P68871",
+        "ligand_ids": "HEM",
+        "ligand_names": "Heme",
+        "bound_components": "HEM",
+        "experimental_method": "X-RAY DIFFRACTION",
+        "resolution": "1.74",
+        "keywords": "OXYGEN TRANSPORT",
+        "image_url": "https://cdn.rcsb.org/images/structures/4hhb_assembly-1.jpeg",
+        "structure_file_url": "https://files.rcsb.org/download/4HHB.cif",
+        "source": "demo_cache",
+        "query_status": "ok",
+        "data_status": "full"
+      }
+    }
+  ]
+}

@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iDrug - Sign In</title>
+  <link rel="shortcut icon" href="{% static 'Source/drugTitle.png' %}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="box">
+    <h2>iDrug</h2>
+    <div class="inputBox">
+      <input class="userNameInputBox" type="text" id="userName_id" placeholder="Enter username" required="required">
+      <span class="userNameSpan">Username</span>
+      <span class="Worn" id="userNameWorn" style="display: none">Username not found</span>
+      <br><br>
+
+      <input class="passwordInputBox" type="password" id="password_id" placeholder="Enter password" required="required">
+      <span class="passwordSpan">Password</span>
+      <span class="Worn" id="passwordWorn" style="display: none">Incorrect password</span>
+      <br><br>
+
+      <button class="submitInput" onclick="loginClick()">Sign In</button>
+
+      <br><br>
+      <div style="text-align: center; margin-top: 15px;">
+        <a href="/signUp.html" style="color: #4CAF50; text-decoration: none;">
+          No account? Register now
+        </a>
+      </div>
+    </div>
+  </div>
+
+<script>
+const APP_BASE_URL = window.location.origin;
+const LOGIN_API_URL = `${APP_BASE_URL}/login/`;
+const HOME_PAGE_URL = `${APP_BASE_URL}/home.html`;
+
+function hideWarnings() {
+  document.getElementById('userNameWorn').style.display = 'none';
+  document.getElementById('passwordWorn').style.display = 'none';
+}
+
+function loginClick() {
+  const userName = document.getElementById('userName_id').value.trim();
+  const password = document.getElementById('password_id').value;
+  const submitBtn = document.querySelector('.submitInput');
+  const originalText = submitBtn.textContent;
+
+  hideWarnings();
+
+  if (!userName) {
+    alert('Please enter your username.');
+    document.getElementById('userName_id').focus();
+    return;
+  }
+
+  if (!password) {
+    alert('Please enter your password.');
+    document.getElementById('password_id').focus();
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Signing in...';
+
+  axios({
+    method: 'POST',
+    url: LOGIN_API_URL,
+    data: {
+      userName: userName,
+      password: password
+    },
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    },
+    timeout: 10000,
+    withCredentials: false
+  }).then(function(response) {
+    const responseData = String(response.data).trim();
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+
+    if (responseData === 'true') {
+      sessionStorage.setItem('userName', userName);
+      sessionStorage.setItem('loginTime', new Date().toISOString());
+      alert('Sign-in successful. Redirecting to the home page.');
+      window.location.href = HOME_PAGE_URL;
+      return;
+    }
+
+    if (responseData === 'false_1') {
+      document.getElementById('userNameWorn').style.display = 'inline-block';
+      alert('Username not found. Please check it or register a new account.');
+      return;
+    }
+
+    if (responseData === 'false_2') {
+      document.getElementById('passwordWorn').style.display = 'inline-block';
+      alert('Incorrect password. Please try again.');
+      return;
+    }
+
+    if (responseData === 'false_0') {
+      alert('Username and password are required.');
+      return;
+    }
+
+    alert('Sign-in failed. The server returned an unknown response: ' + responseData);
+  }).catch(function(error) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+
+    let errorMsg = 'Sign-in failed.';
+    if (error.response) {
+      errorMsg += ' Status code: ' + error.response.status;
+      if (error.response.status === 404) {
+        errorMsg += '\nReason: username not found or the sign-in API endpoint is unavailable.';
+      } else if (error.response.status === 401) {
+        errorMsg += '\nReason: incorrect password.';
+      } else if (error.response.status === 500) {
+        errorMsg += '\nReason: internal server error. Please check the backend logs.';
+      }
+      if (error.response.data) {
+        errorMsg += '\nResponse: ' + JSON.stringify(error.response.data);
+      }
+    } else if (error.request) {
+      errorMsg += '\nNo response received from the backend. Please confirm the Django server is running.';
+    } else {
+      errorMsg += '\n' + error.message;
+    }
+    alert(errorMsg);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const savedUserName = sessionStorage.getItem('userName');
+  if (savedUserName) {
+    document.getElementById('userName_id').value = savedUserName;
+  }
+
+  document.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+      loginClick();
+    }
+  });
+});
+</script>
+</body>
+</html>
+

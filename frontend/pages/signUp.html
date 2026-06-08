@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iDrug - Register</title>
+  <link rel="shortcut icon" href="{% static 'Source/drugTitle.png' %}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="box">
+    <h2>iDrug</h2>
+    <div class="inputBox">
+      <div id="registerApp">
+        <input class="userNameInputBox" type="text" id="userName_id" placeholder="Enter username" required="required">
+        <span class="userNameSpan">Username</span>
+        <span class="Worn" id="userNameWorn" style="display: none">Username already exists</span>
+        <br><br>
+
+        <input class="passwordInputBox" type="password" id="password_id" placeholder="Enter password" required="required">
+        <span class="passwordSpan">Password</span>
+        <span class="Worn" id="passwordWorn" style="display: none">Please enter a password</span>
+        <br><br>
+
+        <input class="passwordInputBox" type="text" id="phone_id" placeholder="Enter phone number (optional)">
+        <span class="passwordSpan">Phone</span>
+        <br><br>
+
+        <button class="submitInput" onclick="registerClick()">Create Account</button>
+
+        <br><br>
+        <div style="text-align:center; margin-top: 15px;">
+          <a href="/login.html" style="color: #4CAF50; text-decoration: none;">
+            Already have an account? Sign in
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const APP_BASE_URL = window.location.origin;
+const REGISTER_API_URL = `${APP_BASE_URL}/register/`;
+const LOGIN_PAGE_URL = `${APP_BASE_URL}/login.html`;
+
+function hideWarnings() {
+    document.getElementById('userNameWorn').style.display = 'none';
+    document.getElementById('passwordWorn').style.display = 'none';
+}
+
+function registerClick() {
+    const userName = document.getElementById('userName_id').value.trim();
+    const password = document.getElementById('password_id').value;
+    const phoneNumber = document.getElementById('phone_id').value.trim();
+    const submitBtn = document.querySelector('.submitInput');
+    const originalText = submitBtn.textContent;
+
+    hideWarnings();
+
+    if (!userName) {
+        alert('Please enter a username.');
+        document.getElementById('userName_id').focus();
+        return;
+    }
+    if (!password) {
+        document.getElementById('passwordWorn').style.display = 'inline-block';
+        alert('Please enter a password.');
+        document.getElementById('password_id').focus();
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Creating...';
+
+    axios({
+        method: 'POST',
+        url: REGISTER_API_URL,
+        data: {
+            userName: userName,
+            password: password,
+            phoneNumber: phoneNumber
+        },
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        timeout: 10000,
+        withCredentials: false
+    }).then(function(response) {
+        const responseData = String(response.data).trim();
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+
+        if (responseData === 'true') {
+            alert('Registration successful. Please sign in.');
+            window.location.href = LOGIN_PAGE_URL;
+            return;
+        }
+
+        if (responseData === 'false_1') {
+            document.getElementById('userNameWorn').style.display = 'inline-block';
+            alert('This username already exists. Please choose another one.');
+            return;
+        }
+
+        if (responseData === 'false_0') {
+            alert('Username and password are required.');
+            return;
+        }
+
+        alert('Registration failed. The server returned an unknown response: ' + responseData);
+    }).catch(function(error) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+
+        let errorMsg = 'Registration failed.';
+        if (error.response) {
+            errorMsg += ' Status code: ' + error.response.status;
+            if (error.response.data) {
+                errorMsg += '\nResponse: ' + JSON.stringify(error.response.data);
+            }
+        } else if (error.request) {
+            errorMsg += '\nNo response received from the backend.';
+        } else {
+            errorMsg += '\n' + error.message;
+        }
+        alert(errorMsg);
+    });
+}
+
+document.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        registerClick();
+    }
+});
+</script>
+</body>
+</html>
+

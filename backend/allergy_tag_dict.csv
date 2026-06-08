@@ -1,0 +1,26 @@
+code,label,aliases,is_active,sort_order
+penicillin,青霉素,"青霉素,penicillin",true,1
+nsaid,非甾体抗炎药,"非甾体抗炎药,NSAIDs,nsaid",true,2
+sulfonamide,磺胺类,"磺胺类,sulfonamide,sulfa",true,3
+aspirin,阿司匹林,"阿司匹林,aspirin",true,4
+cephalosporin,头孢菌素类,"头孢菌素类,头孢类,cephalosporin",true,5
+beta_lactam,β-内酰胺类,"β-内酰胺类,beta-lactam,beta lactam",true,6
+ibuprofen,布洛芬,"布洛芬,ibuprofen",true,7
+amoxicillin,阿莫西林,"阿莫西林,amoxicillin",true,8
+macrolide,大环内酯类,"大环内酯类,macrolide",true,9
+fluoroquinolone,氟喹诺酮类,"氟喹诺酮类,fluoroquinolone",true,10
+tetracycline,四环素类,"四环素类,tetracycline",true,11
+clindamycin,克林霉素,"克林霉素,clindamycin",true,12
+vancomycin,万古霉素,"万古霉素,vancomycin",true,13
+carbapenem,碳青霉烯类,"碳青霉烯类,carbapenem",true,14
+contrast_media,造影剂,"造影剂,对比剂,contrast media,contrast agent",true,15
+aminoglycoside,氨基糖苷类,"氨基糖苷类,aminoglycoside",true,16
+opioid,阿片类,"阿片类,opioid",true,17
+local_anesthetic,局部麻醉药,"局部麻醉药,local anesthetic",true,18
+insulin,胰岛素,"胰岛素,insulin",true,19
+heparin,肝素,"肝素,heparin",true,20
+latex,乳胶,"乳胶,latex",true,21
+iodine,碘,"碘,iodine",true,22
+azithromycin,阿奇霉素,"阿奇霉素,azithromycin",true,23
+doxycycline,多西环素,"多西环素,doxycycline",true,24
+oseltamivir,奥司他韦,"奥司他韦,oseltamivir",true,25

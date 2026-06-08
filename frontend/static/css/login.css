@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    background: linear-gradient(135deg, #dbeafe, #eff6ff 45%, #f8fafc);
+}
+
+.box {
+    width: min(420px, 92vw);
+    padding: 36px 32px;
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(37, 99, 235, 0.16);
+}
+
+.box h2 {
+    margin: 0 0 24px;
+    text-align: center;
+    color: #1d4ed8;
+}
+
+.inputBox input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    outline: none;
+}
+
+.inputBox input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.userNameSpan,
+.passwordSpan {
+    display: block;
+    margin-top: 8px;
+    color: #475569;
+    font-size: 14px;
+}
+
+.Worn {
+    color: #dc2626;
+    font-size: 13px;
+}
+
+.submitInput {
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submitInput:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}

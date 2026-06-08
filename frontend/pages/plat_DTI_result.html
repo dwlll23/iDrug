@@ -1,0 +1,310 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDrug - DTI Prediction Result</title>
+    <link rel="shortcut icon" href="{% static 'Source/drugTitle.png' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+    <style>
+        body { margin: 0; background: #f4f7fb; color: #243746; font-family: "Microsoft YaHei", sans-serif; }
+        .hero-shell { position: relative; padding: 58px 0 34px; background: radial-gradient(circle at top right, rgba(107, 143, 220, 0.16), transparent 34%), linear-gradient(180deg, #f8fbff 0%, #edf3fb 100%); color: #22324a; border-bottom: 1px solid rgba(219, 228, 241, 0.72); }
+        .hero-shell::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at top right, rgba(107, 143, 220, 0.14), transparent 34%); pointer-events: none; }
+        .hero-inner, .page-shell { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+        .hero-kicker, .hero-chip { display: inline-flex; border-radius: 999px; border: 1px solid #dbe4f1; }
+        .hero-kicker { align-items: center; padding: 8px 14px; background: rgba(255,255,255,0.12); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+        .hero-title { margin: 18px 0 14px; font-size: 36px; line-height: 1.15; font-weight: 700; }
+        .hero-text { max-width: none; width: 100%; margin: 0; line-height: 1.9; color: #6b7a90; font-size: 15px; }
+        .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .hero-chip { padding: 8px 14px; background: #f7faff; color: #6b7a90; font-size: 13px; border: 1px solid #dbe4f1;}
+        .page-shell { padding: 28px 24px 56px; }
+        .summary-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: -26px; position: relative; z-index: 2; }
+        .summary-card, .panel-card { background: #fff; box-shadow: 0 16px 40px rgba(15, 42, 61, 0.08); }
+        .summary-card { padding: 18px 20px; border-radius: 20px; }
+        .summary-label, .detail-label, .subtle { color: #7d8a96; font-size: 13px; }
+        .summary-value { color: #143d63; font-size: 24px; font-weight: 700; }
+        .section-block { margin-top: 26px; }
+        .section-title { margin: 0 0 10px; font-size: 28px; color: #20364a; }
+        .section-text { margin: 0; color: #637381; line-height: 1.85; }
+        .panel-card { border: 0; border-radius: 22px; overflow: hidden; }
+        .panel-title { font-size: 18px; font-weight: 700; color: #20364a; }
+        .detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; }
+        .detail-item { padding: 14px 16px; border-radius: 14px; background: #f7fafc; }
+        .detail-value { color: #243746; font-weight: 600; }
+        .action-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .save-status, .status-note { margin-top: 18px; }
+        .empty-box { padding: 40px 24px; text-align: center; color: #7d8a96; }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .score-cell { font-weight: 700; color: #2b6cb0; }
+        .status-panel { margin-bottom: 14px; padding: 12px 14px; border-radius: 14px; background: #f7fafc; border: 1px solid #e5edf5; }
+        .status-panel strong { color: #20364a; }
+        @media (max-width: 960px) { .hero-title { font-size: 30px; } .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .detail-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 640px) { .summary-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div id="resultApp">
+    <header class="header_home">
+        <h2 class="Logo">iDrug</h2>
+        <nav class="navigation">
+            <a href="/home.html">Home</a>
+            <a href="/plat_DTI_input.html" class="active">Recommend</a>
+            <a href="/prediction_models.html">Models</a>
+            <a href="/Function.html">Explore</a>
+            <a href="/data_sources.html">Data</a>
+            <a href="/userInfo.html">Profile</a>
+            <a href="/tutorial.html">Tutorial</a>
+        </nav>
+        <div class="Login">
+            <el-button v-if="currentUserName" type="text" @click="userExit">Sign Out</el-button>
+            <el-button v-else type="text" @click="goLogin">Sign In</el-button>
+        </div>
+    </header>
+
+    <section class="hero-shell">
+        <div class="hero-inner">
+            <div class="hero-kicker">DTI Result</div>
+            <h1 class="hero-title">DTI Prediction Result</h1>
+            <p class="hero-text">This page displays the raw DTI output, personalized reranking results, and result status details. Entries with structure-only support are clearly marked so you can distinguish fully supported drug results from generic compounds.</p>
+            <div class="hero-meta">
+                <div class="hero-chip">Current User: [[ currentUserName || 'Guest' ]]</div>
+                <div class="hero-chip">Personalization: [[ personalizationApplied ? 'Enabled' : 'Disabled' ]]</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-shell">
+        <div class="summary-grid">
+            <div class="summary-card"><div class="summary-label">Drug Count</div><div class="summary-value">[[ drugRows.length ]]</div></div>
+            <div class="summary-card"><div class="summary-label">Protein Count</div><div class="summary-value">[[ proteinRows.length ]]</div></div>
+            <div class="summary-card"><div class="summary-label">Ranked Results</div><div class="summary-value">[[ rankedResults.length ]]</div></div>
+        </div>
+
+        <div class="section-block">
+            <h2 class="section-title">Result Overview</h2>
+            <p class="section-text">This page presents both the raw DTI output and the personalized reranking results. If an entry only matches compound structure data without full drug metadata, it will be labeled as structure-only.</p>
+        </div>
+
+        <div v-if="loadError" class="empty-box">[[ loadError ]]</div>
+
+        <template v-else>
+            <el-alert v-if="hasLimitedMetadataResults" title="Some results only contain compound structure information and do not include complete personalized drug metadata." type="warning" show-icon :closable="false" class="status-note"></el-alert>
+            <el-alert v-if="saveMessage" :title="saveMessage" :type="saveMessageType" show-icon :closable="true" class="save-status" @close="saveMessage = ''"></el-alert>
+
+            <div class="section-block action-row">
+                <el-button type="success" :loading="saveLoading" @click="saveCurrentResult">Save Result</el-button>
+                <el-button type="primary" plain @click="goBack">Back to Input</el-button>
+            </div>
+
+            <el-row :gutter="24" class="section-block">
+                <el-col :span="10">
+                    <el-card shadow="hover" class="panel-card">
+                        <div slot="header" class="panel-title">Patient Conditions</div>
+                        <div class="detail-grid">
+                            <div class="detail-item"><div class="detail-label">Personalization</div><div class="detail-value">[[ personalizationApplied ? 'Enabled' : 'Disabled' ]]</div></div>
+                            <div class="detail-item"><div class="detail-label">Age</div><div class="detail-value">[[ patientProfile.age !== null && patientProfile.age !== undefined ? patientProfile.age : 'Not Provided' ]]</div></div>
+                            <div class="detail-item"><div class="detail-label">Sex</div><div class="detail-value">[[ sexLabel(patientProfile.sex) ]]</div></div>
+                            <div class="detail-item"><div class="detail-label">Insurance Preference</div><div class="detail-value">[[ insurancePreferenceLabel(patientProfile.insurance_preference) ]]</div></div>
+                        </div>
+                        <div style="margin-top: 16px;"><div class="detail-label">Disease History</div><div class="detail-value">[[ listText(patientProfile.disease_history) ]]</div></div>
+                        <div style="margin-top: 16px;"><div class="detail-label">Allergy History</div><div class="detail-value">[[ listText(patientProfile.allergy_history) ]]</div></div>
+                    </el-card>
+                </el-col>
+                <el-col :span="14">
+                    <el-card shadow="hover" class="panel-card">
+                        <div slot="header" class="panel-title">Personalized Ranking</div>
+                        <div v-if="rankedResults.length === 0" class="empty-box">No personalized ranking results are available.</div>
+                        <el-table v-else :data="rankedResults" border stripe style="width: 100%">
+                            <el-table-column prop="personalized_rank" label="Rank" width="80" align="center"></el-table-column>
+                            <el-table-column prop="original_rank" label="Original Rank" width="90" align="center"></el-table-column>
+                            <el-table-column prop="drug_name" label="Drug Name" min-width="140"></el-table-column>
+                            <el-table-column prop="pubchem_cid" label="CID" width="110" align="center"></el-table-column>
+                            <el-table-column label="Status" width="120" align="center">
+                                <template slot-scope="scope">
+                                    <el-tag :type="metadataTagType(scope.row.metadata_status && scope.row.metadata_status.level)" size="mini">[[ metadataLabel(scope.row) ]]</el-tag>
+                                </template>
+                            </el-table-column>
+                            <el-table-column prop="dti_score_raw" label="Raw DTI Score" width="120" align="center" class-name="score-cell"></el-table-column>
+                            <el-table-column prop="recommendation_reason" label="Reason" min-width="260" show-overflow-tooltip></el-table-column>
+                        </el-table>
+                    </el-card>
+                </el-col>
+            </el-row>
+
+            <el-row :gutter="24" class="section-block">
+                <el-col :span="12">
+                    <el-card shadow="hover" class="panel-card">
+                        <div slot="header" class="panel-title">Raw Drug Data</div>
+                        <div v-if="drugRows.length === 0" class="empty-box">No drug data is available.</div>
+                        <el-table v-else :data="drugRows" border stripe style="width: 100%">
+                            <el-table-column prop="index" label="#" width="70" align="center"></el-table-column>
+                            <el-table-column prop="drugx_id" label="CID" width="120" align="center"></el-table-column>
+                            <el-table-column prop="iupac_name" label="Drug Name" min-width="180" show-overflow-tooltip></el-table-column>
+                            <el-table-column prop="smiles" label="SMILES" min-width="220" show-overflow-tooltip></el-table-column>
+                            <el-table-column label="Status" width="120" align="center">
+                                <template slot-scope="scope">
+                                    <el-tag :type="metadataTagType(scope.row.metadata_status && scope.row.metadata_status.level)" size="mini">[[ scope.row.metadata_label ]]</el-tag>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </el-card>
+                </el-col>
+                <el-col :span="12">
+                    <el-card shadow="hover" class="panel-card">
+                        <div slot="header" class="panel-title">Raw Protein Data</div>
+                        <div v-if="proteinRows.length === 0" class="empty-box">No protein data is available.</div>
+                        <el-table v-else :data="proteinRows" border stripe style="width: 100%">
+                            <el-table-column prop="index" label="#" width="70" align="center"></el-table-column>
+                            <el-table-column prop="protein_id" label="Protein" width="110" align="center"></el-table-column>
+                            <el-table-column prop="seq" label="Sequence" min-width="240" show-overflow-tooltip></el-table-column>
+                        </el-table>
+                    </el-card>
+                </el-col>
+            </el-row>
+
+        </template>
+    </div>
+</div>
+
+<script>
+new Vue({
+    el: '#resultApp',
+    delimiters: ['[[', ']]'],
+    data() {
+        return { rawData: null, currentUserName: '', loadError: '', saveLoading: false, saveMessage: '', saveMessageType: 'success' };
+    },
+    computed: {
+        personalizationApplied() { return !!(this.rawData && this.rawData.personalization_applied); },
+        patientProfile() { return (this.rawData && this.rawData.patient_profile) || { age: null, sex: '', disease_history: [], allergy_history: [], insurance_preference: '' }; },
+        rankedResults() { return (this.rawData && this.rawData.ranked_results) || []; },
+        hasLimitedMetadataResults() { return this.rankedResults.some((item) => { const level = item && item.metadata_status && item.metadata_status.level; return level === 'compound_only' || level === 'unknown'; }); },
+        drugRows() { return ((this.rawData && this.rawData.drug) || []).map((item, index) => ({ index: index + 1, drugx_id: item.drugx_id || '-', iupac_name: item.iupac_name || item.drug_name || '-', smiles: item.smiles || '-', metadata_status: item.metadata_status || null, metadata_label: item.metadata_status && item.metadata_status.label ? item.metadata_status.label : 'Insufficient Information' })); },
+        proteinRows() { return ((this.rawData && this.rawData.protein) || []).map((item, index) => ({ index: index + 1, protein_id: item.protein_id || item.pdb_id || '-', seq: item.seq || '-' })); },
+        probRows() { return (this.rawData && this.rawData.prob) || []; }
+    },
+    created() { this.loadCurrentUser(); this.loadResult(); },
+    mounted() { this.resumePendingSaveIfNeeded(); },
+    methods: {
+        loadCurrentUser() {
+            axios.get('/api/current-user/').then((response) => {
+                const user = (response.data && response.data.user) || {};
+                const username = user.username || '';
+                this.currentUserName = username;
+                if (username) sessionStorage.setItem('userName', username);
+                else sessionStorage.removeItem('userName');
+            }).catch(() => {
+                this.currentUserName = '';
+                sessionStorage.removeItem('userName');
+                sessionStorage.removeItem('loginTime');
+            });
+        },
+        loadResult() {
+            const raw = localStorage.getItem('preData');
+            if (!raw) { this.loadError = 'No prediction result was found to display. Please run a DTI prediction first.'; return; }
+            try { this.rawData = JSON.parse(raw); }
+            catch (error) { console.error('Failed to parse result data', error); this.loadError = 'Failed to parse the result data. Please go back and run the prediction again.'; }
+        },
+        safeList(value) { return Array.isArray(value) ? value : []; },
+        formatCodeLabel(value) {
+            if (!value) return '';
+            const text = String(value).replace(/_/g, ' ').trim();
+            return text ? text.replace(/\b\w/g, (char) => char.toUpperCase()) : '';
+        },
+        listText(value) {
+            const list = this.safeList(value).map((item) => this.formatCodeLabel(item)).filter(Boolean);
+            return list.length ? list.join(', ') : 'Not Provided';
+        },
+        sexLabel(value) { if (value === 'male') return 'Male'; if (value === 'female') return 'Female'; if (value === 'unknown') return 'Unknown'; return 'Not Provided'; },
+        insurancePreferenceLabel(value) { if (value === 'yes') return 'Insurance Focused'; if (value === 'no') return 'No Insurance Preference'; return 'Not Provided'; },
+        metadataTagType(level) { if (level === 'full') return 'success'; if (level === 'compound_only') return 'warning'; return 'info'; },
+        metadataLabel(item) { return (item && item.metadata_status && item.metadata_status.label) || 'Insufficient Information'; },
+        metadataMessage(item) { return (item && item.metadata_status && item.metadata_status.message) || 'No complete structure or drug metadata was matched. This result is for reference only.'; },
+        goBack() { window.location.href = '/plat_DTI_input.html'; },
+        goLogin() { window.location.href = '/login.html'; },
+        userExit() {
+            axios.post('/logout/').finally(() => {
+                sessionStorage.removeItem('userName');
+                sessionStorage.removeItem('loginTime');
+                this.currentUserName = '';
+                window.location.href = '/home.html';
+            });
+        },
+        clearPendingSave() {
+            localStorage.removeItem('pendingAction');
+            localStorage.removeItem('pendingResultPayload');
+            localStorage.removeItem('pendingReturnUrl');
+            localStorage.removeItem('pendingCreatedAt');
+        },
+        storePendingSave() {
+            localStorage.setItem('pendingAction', 'save_result');
+            localStorage.setItem('pendingResultPayload', JSON.stringify(this.rawData || {}));
+            localStorage.setItem('pendingReturnUrl', '/plat_DTI_result.html');
+            localStorage.setItem('pendingCreatedAt', String(Date.now()));
+        },
+        saveCurrentResult() {
+            if (!this.currentUserName) {
+                this.storePendingSave();
+                this.$message.warning('Please sign in before saving the result.');
+                window.location.href = '/login.html';
+                return;
+            }
+            if (!this.rawData) {
+                this.$message.error('There is no result available to save.');
+                return;
+            }
+            this.saveLoading = true;
+            axios.post('/api/save-recommendation/', { result_payload: this.rawData }).then((response) => {
+                const payload = response.data || {};
+                const saveId = payload.save_id || '';
+                const fileName = payload.file_name || '';
+                this.saveMessageType = 'success';
+                this.saveMessage = `Saved successfully${saveId ? `, Save ID: ${saveId}` : ''}${fileName ? `, File: ${fileName}` : ''}`;
+                this.clearPendingSave();
+                setTimeout(() => {
+                    const highlight = saveId ? `?highlight=${encodeURIComponent(saveId)}` : '';
+                    window.location.href = `/saved_results.html${highlight}`;
+                }, 600);
+            }).catch((error) => {
+                console.error('Failed to save result', error);
+                if (error.response && error.response.status === 401) {
+                    this.storePendingSave();
+                    this.$message.warning('Your sign-in session has expired. Please sign in again to continue saving.');
+                    window.location.href = '/login.html';
+                    return;
+                }
+                this.saveMessageType = 'error';
+                this.saveMessage = 'Failed to save the result. Please try again later.';
+            }).finally(() => { this.saveLoading = false; });
+        },
+        resumePendingSaveIfNeeded() {
+            const pendingAction = localStorage.getItem('pendingAction');
+            const pendingCreatedAt = Number(localStorage.getItem('pendingCreatedAt') || '0');
+            const pendingResultPayload = localStorage.getItem('pendingResultPayload');
+            const ttl = 30 * 60 * 1000;
+            if (pendingAction !== 'save_result') return;
+            if (!pendingCreatedAt || Date.now() - pendingCreatedAt > ttl) { this.clearPendingSave(); return; }
+            if (!this.currentUserName) return;
+            if (pendingResultPayload) {
+                try { this.rawData = JSON.parse(pendingResultPayload); localStorage.setItem('preData', pendingResultPayload); }
+                catch (error) { console.error('Failed to restore pending save result', error); this.clearPendingSave(); return; }
+            }
+            this.$message.success('The unfinished save action has been restored.');
+            this.saveCurrentResult();
+        }
+    }
+});
+</script>
+</body>
+</html>
+
+
+
+

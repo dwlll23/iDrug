@@ -1,0 +1,741 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDrug - Query Center</title>
+    <link rel="shortcut icon" href="{% static 'Source/drugTitle.png' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/3dmol/build/3Dmol-min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            background: #f4f7fb;
+            color: #243746;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        .hero-shell { position: relative; padding: 58px 0 34px; background: radial-gradient(circle at top right, rgba(107, 143, 220, 0.16), transparent 34%), linear-gradient(180deg, #f8fbff 0%, #edf3fb 100%); color: #22324a; border-bottom: 1px solid rgba(219, 228, 241, 0.72); }
+        .hero-inner, .page-shell {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .hero-kicker {
+            display: inline-flex;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #edf3fb;
+            border: 1px solid #dbe4f1;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        color: #6b7a90;}
+        .hero-title {
+            margin: 18px 0 12px;
+            font-size: 36px;
+            line-height: 1.15;
+            font-weight: 700;
+        }
+        .hero-text {
+            max-width: none; width: 100%;
+            margin: 0;
+            line-height: 1.9;
+            color: #6b7a90;
+            font-size: 15px;
+        }
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .hero-chip {
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #f7faff;
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #6b7a90;
+            font-size: 13px;
+        border: 1px solid #dbe4f1;}
+        .page-shell {
+            padding-top: 28px;
+            padding-bottom: 56px;
+        }
+        .section-title {
+            margin: 0 0 10px;
+            font-size: 28px;
+            color: #20364a;
+        }
+        .section-text {
+            margin: 0 0 24px;
+            color: #637381;
+            line-height: 1.85;
+        }
+        .control-row {
+            display: grid;
+            grid-template-columns: 260px minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+        .menu-card, .panel-card {
+            border: 0;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(15, 42, 61, 0.08);
+            background: #fff;
+        }
+        .menu-card {
+            padding: 10px 0;
+        }
+        .menu-title {
+            padding: 8px 24px 16px;
+            color: #7d8a96;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+        .search-panel {
+            padding: 26px 28px;
+        }
+        .panel-head {
+            margin-bottom: 22px;
+        }
+        .panel-head h3 {
+            margin: 0 0 10px;
+            font-size: 26px;
+            color: #20364a;
+        }
+        .panel-head p {
+            margin: 0;
+            color: #637381;
+            line-height: 1.85;
+        }
+        .input-with-select {
+            width: 100%;
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .visual-card {
+            padding: 24px;
+        }
+        .visual-title {
+            margin: 0 0 16px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #20364a;
+        }
+        .structure-frame {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            border-radius: 18px;
+            background: #f7fafc;
+        }
+        .viewer-shell {
+            width: 100%;
+            height: 320px;
+            border-radius: 18px;
+            overflow: hidden;
+            background: radial-gradient(circle at 20% 20%, #fdfefe 0%, #edf3fb 100%);
+            position: relative;
+        }
+        .viewer-canvas {
+            width: 100%;
+            height: 100%;
+        }
+        .viewer-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9aa5b1;
+            font-size: 15px;
+            text-align: center;
+            padding: 24px;
+            pointer-events: none;
+        }
+                .viewer-placeholder--image {
+            padding: 0;
+            align-items: stretch;
+            justify-content: stretch;
+            pointer-events: none;
+        }
+                .viewer-placeholder--image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 18px;
+            background: #f7fafc;
+        }
+                .viewer-placeholder-copy {
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 36px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.88);
+            border: 1px solid #dbe4f1;
+            color: #7d8a96;
+            line-height: 1.6;
+        }
+                .viewer-placeholder-copy strong {
+            color: #20364a;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .image-slot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 320px;
+            color: #9aa5b1;
+            font-size: 26px;
+        }
+        .info-card {
+            padding: 24px 28px;
+        }
+        .info-card h4 {
+            margin: 0 0 18px;
+            font-size: 18px;
+            color: #20364a;
+        }
+        .info-table {
+            display: grid;
+            gap: 12px;
+        }
+        .info-item {
+            display: grid;
+            grid-template-columns: 180px minmax(0, 1fr);
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: #f7fafc;
+        }
+        .info-label {
+            color: #7d8a96;
+            font-size: 13px;
+        }
+        .info-value {
+            color: #243746;
+            font-weight: 600;
+            word-break: break-word;
+        }
+        .coming-soon {
+            padding: 32px 28px;
+            color: #637381;
+            line-height: 1.85;
+        }
+        .coming-soon h3 {
+            margin: 0 0 12px;
+            color: #20364a;
+            font-size: 24px;
+        }
+        @media (max-width: 980px) {
+            .control-row,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 30px;
+            }
+            .info-item {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <header class="header_home">
+        <h2 class="Logo">iDrug</h2>
+        <nav class="navigation">
+            <a href="/home.html">Home</a>
+            <a href="/plat_DTI_input.html">Recommend</a>
+            <a href="/prediction_models.html">Models</a>
+            <a href="/Function.html" class="active">Explore</a>
+            <a href="/data_sources.html">Data</a>
+            <a href="/userInfo.html">Profile</a>
+            <a href="/tutorial.html">Tutorial</a>
+        </nav>
+        <div class="Login">
+            <el-button v-if="userName_login !== 'Guest'" type="text" @click="userExit">Sign Out</el-button>
+            <el-button v-else type="text" @click="goLogin">Sign In</el-button>
+        </div>
+    </header>
+
+    <section class="hero-shell">
+        <div class="hero-inner">
+            <div class="hero-kicker">Function Center</div>
+            <h1 class="hero-title">Drug and Protein Query Center</h1>
+            <p class="hero-text">
+                This page provides drug structure lookup, protein structure lookup, and an extensible information-mining entry point, all aligned with the same visual style as the home page and DTI workflow.
+            </p>
+            <div class="hero-meta">
+                <div class="hero-chip">Current User: [[ userName_login ]]</div>
+                <div class="hero-chip">Current Module: [[ currentModuleLabel ]]</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="page-shell">
+        <h2 class="section-title">Module Selection</h2>
+        <p class="section-text">
+            Choose a module on the left and complete the search on the right. Both signed-in and guest users can use the query tools.
+        </p>
+
+        <div class="control-row">
+            <div class="menu-card">
+                <div class="menu-title">Modules</div>
+                <el-menu default-active="1" v-model="activeTab" @select="handleSelect">
+                    <el-menu-item index="1"><i class="el-icon-collection"></i>Complex Structure Query</el-menu-item>
+                    <el-menu-item index="2"><i class="el-icon-menu"></i>Drug Structure Query</el-menu-item>
+                    <el-menu-item index="3"><i class="el-icon-document"></i>Protein Structure Query</el-menu-item>
+                    <el-menu-item index="4"><i class="el-icon-setting"></i>Information Mining</el-menu-item>
+                </el-menu>
+            </div>
+
+            <div>
+                <div v-show="activeTab === '1'" class="panel-card search-panel">
+                    <div class="panel-head">
+                        <h3>Complex Structure Query</h3>
+                        <p>Search by PDB ID. The system will query the local complex cache first and fall back to online PDB data only when no local complex record is available.</p>
+                    </div>
+                    <el-input placeholder="Enter complex PDB ID" v-model="inputComplex" class="input-with-select" clearable>
+                        <el-button slot="append" type="primary" icon="el-icon-search" @click="submitComplexInfo"></el-button>
+                    </el-input>
+
+                    <div class="result-grid">
+                        <div class="panel-card visual-card">
+                            <div class="visual-title">Complex 3D View</div>
+                            <div class="viewer-shell">
+                                <div id="complex-viewer" class="viewer-canvas"></div>
+                                <div v-if="!complexViewerLoaded" class="viewer-placeholder viewer-placeholder--image">
+                                    <img src="/pic/3s8l_assembly-1.jpeg" alt="Complex example" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="viewer-placeholder-copy"><strong>Example complex preview</strong></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-card info-card">
+                            <h4>Complex Information</h4>
+                            <div class="info-table">
+                                <div class="info-item"><div class="info-label">PDB ID</div><div class="info-value">[[ complex_pdb_id || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Title</div><div class="info-value">[[ complex_title || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Protein Name</div><div class="info-value">[[ complex_protein_name || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Ligand IDs</div><div class="info-value">[[ complex_ligand_ids || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Ligand Names</div><div class="info-value">[[ complex_ligand_names || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Bound Components</div><div class="info-value">[[ complex_bound_components || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Keywords</div><div class="info-value">[[ complex_keywords || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Structure File</div><div class="info-value"><a v-if="complex_structure_file_url" :href="complex_structure_file_url" target="_blank" rel="noopener">Open Structure File</a><span v-else>-</span></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-show="activeTab === '2'" class="panel-card search-panel">
+                    <div class="panel-head">
+                        <h3>Drug Structure Query</h3>
+                        <p>Search by SMILES or PubChem CID and display the five most useful core fields for the compound.</p>
+                    </div>
+                    <el-input :placeholder="drugPlaceholder" v-model="inputMole" class="input-with-select" clearable>
+                        <el-select v-model="selectMoleType" slot="prepend" placeholder="Select">
+                            <el-option label="CID" value="2"></el-option>
+                            <el-option label="SMILES" value="1"></el-option>
+                        </el-select>
+                        <el-button slot="append" type="primary" icon="el-icon-search" @click="submitInfo"></el-button>
+                    </el-input>
+
+                    <div class="result-grid">
+                        <div class="panel-card visual-card">
+                            <div class="visual-title">Structure Image</div>
+                            <div class="structure-frame">
+                                <el-image
+                                    :src="imgSrc"
+                                    style="width: 100%; max-width: 320px; height: 320px;"
+                                    :preview-src-list="[imgSrc]"
+                                    fallback="/pic/substruct_search_parameters1.png">
+                                    <div slot="error" class="image-slot">
+                                        <i class="el-icon-picture-outline"></i>
+                                    </div>
+                                </el-image>
+                            </div>
+                        </div>
+
+                        <div class="panel-card info-card">
+                            <h4>Drug Information</h4>
+                            <div class="info-table">
+                                <div class="info-item"><div class="info-label">CID</div><div class="info-value">[[ drugx_id || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Drug Name</div><div class="info-value">[[ IupacName || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">SMILES</div><div class="info-value">[[ CanonicalSMILES || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Molecular Formula</div><div class="info-value">[[ MolecularFormula || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Molecular Weight</div><div class="info-value">[[ MolecularWeight || '-' ]]</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-show="activeTab === '3'" class="panel-card search-panel">
+                    <div class="panel-head">
+                        <h3>Protein Structure Query</h3>
+                        <p>Search by PDB ID, UniProt accession, or protein sequence and display the structure image plus core protein metadata.</p>
+                    </div>
+                    <el-input :placeholder="proteinPlaceholder" v-model="inputProtein" class="input-with-select" clearable>
+                        <el-select v-model="selectProteinType" slot="prepend" placeholder="Select">
+                            <el-option label="PDB" value="1"></el-option>
+                            <el-option label="UniProt" value="2"></el-option>
+                            <el-option label="Sequence" value="3"></el-option>
+                        </el-select>
+                        <el-button slot="append" type="primary" icon="el-icon-search" @click="submitInfo1"></el-button>
+                    </el-input>
+
+                    <div class="result-grid">
+                        <div class="panel-card visual-card">
+                            <div class="visual-title">Structure Image</div>
+                            <div class="structure-frame">
+                                <el-image
+                                    :src="imgSrc1"
+                                    style="width: 100%; max-width: 320px; height: 320px;"
+                                    :preview-src-list="[imgSrc1]"
+                                    fallback="/pic/5IMT.png">
+                                    <div slot="error" class="image-slot">
+                                        <i class="el-icon-picture-outline"></i>
+                                    </div>
+                                </el-image>
+                            </div>
+                        </div>
+
+                        <div class="panel-card info-card">
+                            <h4>Protein Information</h4>
+                            <div class="info-table">
+                                <div class="info-item"><div class="info-label">PDB ID</div><div class="info-value">[[ pdb_id || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">UniProt</div><div class="info-value">[[ uniprot_id || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Sequence</div><div class="info-value">[[ seq || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Molecular Weight</div><div class="info-value">[[ molecular_weight2 || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Bound Components</div><div class="info-value">[[ nonpolymer_bound_components || '-' ]]</div></div>
+                                <div class="info-item"><div class="info-label">Keywords</div><div class="info-value">[[ pdbx_keywords || '-' ]]</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-show="activeTab === '4'" class="panel-card coming-soon">
+                    <h3>Information Mining</h3>
+                    <p>This module is currently reserved as a placeholder and can be expanded later while keeping the same visual structure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                imgSrc: '/pic/substruct_search_parameters1.png',
+                imgSrc1: '/pic/5IMT.png',
+                imgSrcComplex: '/pic/5IMT.png',
+                complexViewer: null,
+                complexViewerLoaded: false,
+                inputComplex: '',
+                inputMole: '',
+                selectMoleType: '2',
+                inputProtein: '',
+                selectProteinType: '1',
+                activeTab: '1',
+                drugx_id: '',
+                MolecularFormula: '',
+                MolecularWeight: '',
+                CanonicalSMILES: '',
+                IupacName: '',
+                XLogP: '',
+                RotatableBondCount: '',
+                pdb_id: '',
+                uniprot_id: '',
+                seq: '',
+                deposit_date: '',
+                release_date: '',
+                molecular_weight2: '',
+                nonpolymer_bound_components: '',
+                pdbx_keywords: '',
+                complex_pdb_id: '',
+                complex_title: '',
+                complex_protein_name: '',
+                complex_ligand_ids: '',
+                complex_ligand_names: '',
+                complex_bound_components: '',
+                complex_keywords: '',
+                complex_structure_file_url: '',
+                userName_login: 'Guest',
+            };
+        },
+        computed: {
+            currentModuleLabel() {
+                const mapping = {
+                    '1': 'Complex Structure Query',
+                    '2': 'Drug Structure Query',
+                    '3': 'Protein Structure Query',
+                    '4': 'Information Mining'
+                };
+                return mapping[this.activeTab] || 'Complex Structure Query';
+            },
+            proteinPlaceholder() {
+                const mapping = {
+                    '1': 'Enter PDB ID',
+                    '2': 'Enter UniProt accession',
+                    '3': 'Enter protein sequence'
+                };
+                return mapping[this.selectProteinType] || 'Enter PDB ID / UniProt accession / protein sequence';
+            },
+            drugPlaceholder() {
+                const mapping = {
+                    '1': 'Enter SMILES',
+                    '2': 'Enter PubChem CID'
+                };
+                return mapping[this.selectMoleType] || 'Enter SMILES / PubChem CID';
+            }
+        },
+        created() {
+            this.loadCurrentUser();
+        },
+        mounted() {
+            this.initializeComplexViewer();
+        },
+        methods: {
+            initializeComplexViewer() {
+                this.$nextTick(() => {
+                    const container = document.getElementById('complex-viewer');
+                    if (!container || typeof $3Dmol === 'undefined') {
+                        return;
+                    }
+                    this.complexViewer = $3Dmol.createViewer(container, {
+                        backgroundColor: '#f7fafc'
+                    });
+                    this.resetComplexViewer();
+                });
+            },
+            resetComplexViewer() {
+                if (!this.complexViewer) {
+                    return;
+                }
+                this.complexViewer.clear();
+                this.complexViewer.setBackgroundColor('#f7fafc');
+                this.complexViewer.render();
+                this.complexViewerLoaded = false;
+            },
+            renderComplexStructure(structureUrl, ligandIds) {
+                if (!this.complexViewer) {
+                    this.initializeComplexViewer();
+                }
+                if (!this.complexViewer || !structureUrl) {
+                    this.resetComplexViewer();
+                    return;
+                }
+
+                fetch(structureUrl).then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Unable to load structure file');
+                    }
+                    return response.text();
+                }).then((data) => {
+                    const viewer = this.complexViewer;
+                    const format = String(structureUrl).toLowerCase().endsWith('.pdb') ? 'pdb' : 'cif';
+                    viewer.clear();
+                    viewer.addModel(data, format);
+                    viewer.setStyle({}, {});
+                    viewer.setStyle({ hetflag: false }, {
+                        cartoon: {
+                            color: '#c8d4ea',
+                            opacity: 0.58
+                        }
+                    });
+
+                    const ligandList = String(ligandIds || '')
+                        .split(/[;,]/)
+                        .map((item) => item.trim())
+                        .filter(Boolean);
+
+                    if (ligandList.length) {
+                        const ligandSelection = { or: ligandList.map((resn) => ({ resn })) };
+                        ligandList.forEach((resn) => {
+                            viewer.setStyle({ resn: resn }, {
+                                stick: { colorscheme: 'orangeCarbon', radius: 0.3 },
+                                sphere: { color: '#ff8a1f', scale: 0.34 }
+                            });
+                        });
+                        viewer.setStyle({
+                            within: { distance: 6, sel: ligandSelection },
+                            hetflag: false
+                        }, {
+                            stick: { colorscheme: 'cyanCarbon', radius: 0.18 }
+                        });
+                        viewer.zoomTo({
+                            within: { distance: 8, sel: ligandSelection }
+                        });
+                    } else {
+                        viewer.setStyle({ hetflag: true }, {
+                            stick: { colorscheme: 'orangeCarbon', radius: 0.3 },
+                            sphere: { color: '#ff8a1f', scale: 0.34 }
+                        });
+                        viewer.zoomTo({ hetflag: true });
+                    }
+
+                    viewer.zoom(1.18, 520);
+                    viewer.render();
+                    this.complexViewerLoaded = true;
+                }).catch((error) => {
+                    console.error('3D complex rendering failed', error);
+                    this.resetComplexViewer();
+                    this.$message.error('3D structure rendering failed.');
+                });
+            },
+            loadCurrentUser() {
+                axios.get('/api/current-user/').then((response) => {
+                    const user = (response.data && response.data.user) || {};
+                    const username = user.username || '';
+                    if (username) {
+                        this.userName_login = username;
+                        sessionStorage.setItem('userName', username);
+                        return;
+                    }
+                    this.userName_login = 'Guest';
+                    sessionStorage.removeItem('userName');
+                }).catch(() => {
+                    this.userName_login = 'Guest';
+                    sessionStorage.removeItem('userName');
+                    sessionStorage.removeItem('loginTime');
+                });
+            },
+            handleSelect(key) {
+                this.activeTab = String(key);
+            },
+            submitComplexInfo() {
+                if (!this.inputComplex) {
+                    this.$message.warning('Please enter a PDB ID first.');
+                    return;
+                }
+                axios.post('/complexApi/', {
+                    inputText: this.inputComplex
+                }).then((resp) => {
+                    const data = resp.data || {};
+                    this.complex_pdb_id = data.pdb_id || '';
+                    this.complex_title = data.title || '';
+                    this.complex_protein_name = data.protein_name || '';
+                    this.complex_ligand_ids = data.ligand_ids || '';
+                    this.complex_ligand_names = data.ligand_names || '';
+                    this.complex_bound_components = data.bound_components || '';
+                    this.complex_keywords = data.keywords || '';
+                    this.complex_structure_file_url = data.structure_file_url || '';
+                    this.imgSrcComplex = data.image_url || '/pic/5IMT.png';
+                    this.renderComplexStructure(this.complex_structure_file_url, this.complex_ligand_ids);
+                    this.$message.success('Complex query completed successfully.');
+                }).catch((error) => {
+                    console.error('Complex query failed', error);
+                    this.resetComplexViewer();
+                    this.$message.error('Complex query failed. Please check the input PDB ID.');
+                });
+            },
+            submitInfo() {
+                if (!this.inputMole || !this.selectMoleType) {
+                    this.$message.warning('Please enter a query and choose a query type first.');
+                    return;
+                }
+                axios.post('/drugApi/', {
+                    selectOp: this.selectMoleType,
+                    inputText: this.inputMole
+                }).then((resp) => {
+                    const data = resp.data || {};
+                    this.drugx_id = data.drugx_id || '';
+                    this.MolecularFormula = data.molecular_formula || '';
+                    this.MolecularWeight = data.molecular_weight || '';
+                    this.CanonicalSMILES = data.smiles || '';
+                    this.IupacName = data.iupac_name || '';
+                    this.XLogP = data.xlogp || '';
+                    this.RotatableBondCount = data.rotatable_bond_count || '';
+                    this.imgSrc = data.url_ || '/pic/substruct_search_parameters1.png';
+                    this.$message.success('Drug query completed successfully.');
+                }).catch((error) => {
+                    console.error('鑽墿鏌ヨ澶辫触', error);
+                    this.$message.error('Drug query failed. Please check the input.');
+                });
+            },
+            submitInfo1() {
+                if (!this.inputProtein || !this.selectProteinType) {
+                    this.$message.warning('Please enter a query and choose a query type first.');
+                    return;
+                }
+                axios.post('/pdbApi/', {
+                    selectOp: this.selectProteinType,
+                    inputText: this.inputProtein
+                }).then((resp) => {
+                    const data = resp.data || {};
+                    this.pdb_id = data.pdb_id || '';
+                    this.uniprot_id = data.uniprot_id || '';
+                    this.seq = data.seq || '';
+                    this.deposit_date = data.deposit_date || '';
+                    this.release_date = data.release_date || '';
+                    this.molecular_weight2 = data.molecular_weight || '';
+                    this.nonpolymer_bound_components = data.nonpolymer_bound_components || '';
+                    this.pdbx_keywords = data.pdbx_keywords || '';
+                    this.imgSrc1 = data.image_url || data.url_ || '/pic/5IMT.png';
+                    this.$message.success('Protein query completed successfully.');
+                }).catch((error) => {
+                    console.error('铔嬬櫧鏌ヨ澶辫触', error);
+                    this.$message.error('Protein query failed. Please check the input.');
+                });
+            },
+            goLogin() {
+                window.location.href = '/login.html';
+            },
+            userExit() {
+                if (this.userName_login === 'Guest') {
+                    this.goLogin();
+                    return;
+                }
+                axios.post('/logout/').finally(() => {
+                    sessionStorage.removeItem('userName');
+                    sessionStorage.removeItem('loginTime');
+                    this.userName_login = 'Guest';
+                    window.location.href = '/home.html';
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

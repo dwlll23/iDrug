@@ -1,0 +1,38 @@
+[
+  {
+    "drugbank_id": "DB00945",
+    "pubchem_cid": "2244",
+    "drug_name": "Aspirin",
+    "price_level": "low",
+    "insurance_status": "covered",
+    "disease_tags": ["高血压", "心血管", "炎症"],
+    "age_group": "adult",
+    "sex_constraint": "all",
+    "caution_tags": ["胃溃疡", "出血"],
+    "recommendation_template": "DTI 预测分较高"
+  },
+  {
+    "drugbank_id": "DB01050",
+    "pubchem_cid": "3672",
+    "drug_name": "Ibuprofen",
+    "price_level": "medium",
+    "insurance_status": "partially_covered",
+    "disease_tags": ["炎症", "疼痛", "关节炎"],
+    "age_group": "adult",
+    "sex_constraint": "all",
+    "caution_tags": ["胃溃疡", "肾病"],
+    "recommendation_template": "DTI 预测分较高"
+  },
+  {
+    "drugbank_id": "DB00316",
+    "pubchem_cid": "1983",
+    "drug_name": "Acetaminophen",
+    "price_level": "low",
+    "insurance_status": "covered",
+    "disease_tags": ["疼痛", "发热"],
+    "age_group": "all",
+    "sex_constraint": "all",
+    "caution_tags": ["肝病"],
+    "recommendation_template": "DTI 预测分较高"
+  }
+]

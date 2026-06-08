@@ -1,0 +1,477 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDrug - Tutorial</title>
+    <link rel="shortcut icon" href="{% static 'Source/drugTitle.png' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <style>
+        .page-shell { max-width: 1180px; margin: 0 auto; padding: 34px 24px 56px; }
+        .hero-shell { position: relative; overflow: hidden; }
+        .hero-inner { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+        .hero-kicker { display: inline-flex; padding: 8px 14px; border-radius: 999px; }
+        .hero-title { margin: 18px 0 12px; font-size: 36px; line-height: 1.15; font-weight: 800; }
+        .hero-text { max-width: none; width: 100%; margin: 0; line-height: 1.9; font-size: 15px; }
+        .tutorial-stack { display: flex; flex-direction: column; gap: 24px; margin-top: 24px; }
+        .section-card {
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(219, 228, 241, 0.72);
+        }
+        .section-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr); gap: 24px; align-items: start; }
+        .section-grid.reverse { grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.05fr); }
+        .section-grid.reverse .text-col { order: 2; }
+        .section-grid.reverse .media-col { order: 1; }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: #eef4ff;
+            color: #5f7eb2;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .section-card h2 { margin: 14px 0 10px; font-size: 28px; color: var(--text-main); }
+        .section-card p { margin: 0; color: var(--text-sub); line-height: 1.85; }
+        .step-list { margin: 18px 0 0; padding-left: 22px; color: var(--text-sub); line-height: 1.9; }
+        .mini-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 18px; }
+        .media-slot {
+            position: relative;
+            min-height: 260px;
+            border-radius: 22px;
+            overflow: hidden;
+            background: linear-gradient(180deg, #f8fbff 0%, #eef3fb 100%);
+            border: 1px dashed #c9d7eb;
+        }
+        .media-slot.large { min-height: 320px; }
+        .media-slot img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            background: #f4f7fb;
+        }
+        .models-shot-tight { padding: 6px; }
+        .models-shot-tight img { object-fit: contain; background: #ffffff; }
+        .media-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 24px;
+            text-align: center;
+            color: #6b7a90;
+        }
+        .media-placeholder strong { color: #22324a; font-size: 16px; }
+        .media-placeholder code {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid #dbe4f1;
+            color: #4c6284;
+            word-break: break-all;
+        }
+        .media-caption {
+            margin-top: 10px;
+            color: #7b8ca3;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+        .quick-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+        .quick-card {
+            padding: 18px 18px 20px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+            border: 1px solid rgba(219, 228, 241, 0.72);
+        }
+        .quick-card .num {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #16325d;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .quick-card h3 { margin: 0 0 8px; font-size: 18px; color: var(--text-main); }
+        .quick-card p { margin: 0; font-size: 14px; }
+        @media (max-width: 1080px) {
+            .section-grid,
+            .section-grid.reverse,
+            .quick-grid { grid-template-columns: 1fr; }
+            .section-grid.reverse .text-col,
+            .section-grid.reverse .media-col { order: initial; }
+        }
+    </style>
+</head>
+<body>
+<div id="tutorialApp">
+    <header class="header_home">
+        <h2 class="Logo">iDrug</h2>
+        <nav class="navigation">
+            <a href="/home.html">Home</a>
+            <a href="/plat_DTI_input.html">Recommend</a>
+            <a href="/prediction_models.html">Models</a>
+            <a href="/Function.html">Explore</a>
+            <a href="/data_sources.html">Data</a>
+            <a href="/userInfo.html">Profile</a>
+            <a href="/tutorial.html" class="active">Tutorial</a>
+        </nav>
+        <div class="Login">
+            <button id="tutorialLoginBtn" type="button" class="session-auth-button">Sign In</button>
+        </div>
+    </header>
+
+    <section class="hero-shell">
+        <div class="hero-inner">
+            <div class="hero-kicker">Tutorial</div>
+            <h1 class="hero-title">Quick Start Guide</h1>
+            <p class="hero-text">This page explains how to use iDrug step by step. Each section below includes a dedicated image slot so you can later replace placeholders with your own screenshots, workflow diagrams, or interface captures.</p>
+        </div>
+    </section>
+
+    <div class="page-shell">
+        <div class="tutorial-stack">
+            <section class="section-card">
+                <div class="section-grid">
+                    <div class="text-col">
+                        <div class="section-label">Overview</div>
+                        <h2>Platform Overview</h2>
+                        <p>iDrug integrates personalized recommendation, multi-scenario prediction, structure exploration, data browsing, and user history management into one workflow-oriented platform. This opening block is suitable for a full-page overview screenshot or a compact workflow diagram.</p>
+                        <ol class="step-list">
+                            <li>Use <strong>Recommend</strong> for patient-aware drug reranking.</li>
+                            <li>Use <strong>Models</strong> for task-based prediction workflows.</li>
+                            <li>Use <strong>Explore</strong> for drug, protein, and complex lookup.</li>
+                            <li>Use <strong>Data</strong> and <strong>Profile</strong> for browsing and record management.</li>
+                        </ol>
+                    </div>
+                    <div class="media-col">
+                        <div class="media-slot large">
+                            <img src="{% static 'tutorial/overview.png' %}" alt="Platform overview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="media-placeholder" style="display:none;">
+                                <strong>Platform Overview Image</strong>
+                                <span>Place your overview screenshot or workflow diagram here.</span>
+                                <code>DrugX/static/tutorial/overview.png</code>
+                            </div>
+                        </div>
+                        <div class="media-caption">Recommended content: homepage overview, overall workflow diagram, or a dashboard-style screenshot covering the major platform modules.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <div class="section-grid reverse">
+                    <div class="text-col">
+                        <div class="section-label">Recommend</div>
+                        <h2>Personalized Recommendation</h2>
+                        <p>This workflow combines drug SMILES, protein sequence, and patient profile inputs to produce patient-oriented recommendation results. It is the most suitable place to show both the input interface and the final recommendation output.</p>
+                        <ol class="step-list">
+                            <li>Enter drug SMILES and protein sequence.</li>
+                            <li>Complete age, sex, disease history, allergy history, and insurance preference.</li>
+                            <li>Run the workflow and review recommendation reasons.</li>
+                            <li>Observe the difference between raw model score and final recommendation logic.</li>
+                        </ol>
+                    </div>
+                    <div class="media-col">
+                        <div class="mini-grid">
+                            <div>
+                                <div class="media-slot">
+                                    <img src="{% static 'tutorial/recommend_input.png' %}" alt="Recommend input" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Recommend Input Screenshot</strong>
+                                        <span>Input page with drug, protein, and patient profile fields.</span>
+                                        <code>DrugX/static/tutorial/recommend_input.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: input form showing SMILES, protein sequence, and the five required personalization fields.</div>
+                            </div>
+                            <div>
+                                <div class="media-slot">
+                                    <img src="{% static 'tutorial/recommend_result.png' %}" alt="Recommend result" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Recommend Result Screenshot</strong>
+                                        <span>Recommendation output page with ranking and reason fields.</span>
+                                        <code>DrugX/static/tutorial/recommend_result.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: final recommendation table or result page with ranking, status, raw score, and recommendation reason.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <div class="section-grid">
+                    <div class="text-col">
+                        <div class="section-label">Models</div>
+                        <h2>Prediction Models</h2>
+                        <p>This module supports multiple DTI-related tasks, including drug repositioning, novel target screening, new drug evaluation, and affinity prediction. It is ideal for showing the task selection area together with a representative result panel.</p>
+                        <ol class="step-list">
+                            <li>Select one of the four prediction tasks.</li>
+                            <li>Provide SMILES and protein sequence inputs.</li>
+                            <li>Run the selected workflow.</li>
+                            <li>Review the raw score and prediction result returned by the current task.</li>
+                        </ol>
+                    </div>
+                    <div class="media-col">
+                        <div class="mini-grid">
+                            <div>
+                                <div class="media-slot">
+                                    <img src="{% static 'tutorial/models_tasks.png' %}" alt="Models task selection" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Models Task Selection Screenshot</strong>
+                                        <span>Show the four task cards and the input form.</span>
+                                        <code>DrugX/static/tutorial/models_tasks.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: the task card area with one task selected and the corresponding input panel visible.</div>
+                            </div>
+                            <div>
+                                <div class="media-slot models-shot-tight">
+                                    <img src="{% static 'tutorial/models_result.png' %}" alt="Models result" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Models Result Screenshot</strong>
+                                        <span>Show the prediction result returned by one task.</span>
+                                        <code>DrugX/static/tutorial/models_result.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: a result example showing task, status, raw score, and the returned first-item record.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <div class="section-grid reverse">
+                    <div class="text-col">
+                        <div class="section-label">Explore</div>
+                        <h2>Structure Exploration</h2>
+                        <p>The Explore page supports compound lookup, protein lookup, and local-first complex query with 3D visualization. This section works best when several screenshots are shown together to illustrate the breadth of the exploration module.</p>
+                        <ol class="step-list">
+                            <li>Use drug lookup for CID and structure-level exploration.</li>
+                            <li>Use protein lookup for sequence and metadata review.</li>
+                            <li>Use complex query for local-first retrieval and complex rendering.</li>
+                            <li>Interact with the 3D viewer to inspect ligand-focused complex structures.</li>
+                        </ol>
+                    </div>
+                    <div class="media-col">
+                        <div class="mini-grid">
+                            <div>
+                                <div class="media-slot">
+                                    <img src="{% static 'tutorial/explore_drug.png' %}" alt="Drug query" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Drug Query Screenshot</strong>
+                                        <span>Drug lookup panel and result card.</span>
+                                        <code>DrugX/static/tutorial/explore_drug.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: drug structure query input and the returned structure information card.</div>
+                            </div>
+                            <div>
+                                <div class="media-slot">
+                                    <img src="{% static 'tutorial/explore_protein.png' %}" alt="Protein query" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Protein Query Screenshot</strong>
+                                        <span>Protein lookup panel and result card.</span>
+                                        <code>DrugX/static/tutorial/explore_protein.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: protein query panel showing PDB lookup and returned sequence or metadata.</div>
+                            </div>
+                            <div>
+                                <div class="media-slot">
+                                    <img src="{% static 'tutorial/explore_complex.png' %}" alt="Complex 3D query" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Complex 3D Screenshot</strong>
+                                        <span>Complex query module with the rendered 3D viewer.</span>
+                                        <code>DrugX/static/tutorial/explore_complex.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: complex query block, ligand-focused 3D viewer, and the associated complex metadata panel.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <div class="section-grid">
+                    <div class="text-col">
+                        <div class="section-label">Data</div>
+                        <h2>Data Browser</h2>
+                        <p>The Data page summarizes local datasets and external reference sources. It is suitable for one screenshot that shows the left-side category navigation and the right-side data preview table.</p>
+                        <ol class="step-list">
+                            <li>Browse local drug, protein, and personalization datasets.</li>
+                            <li>View disease and allergy dictionaries.</li>
+                            <li>Inspect external reference source summaries.</li>
+                        </ol>
+                    </div>
+                    <div class="media-col">
+                        <div class="media-slot large">
+                            <img src="{% static 'tutorial/data_browser.png' %}" alt="Data browser" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="media-placeholder" style="display:none;">
+                                <strong>Data Browser Screenshot</strong>
+                                <span>Show the left-side navigation and the right-side table preview.</span>
+                                <code>DrugX/static/tutorial/data_browser.png</code>
+                            </div>
+                        </div>
+                        <div class="media-caption">Suggested content: one screenshot covering the left navigation, category switch, and table preview area.</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <div class="section-grid reverse">
+                    <div class="text-col">
+                        <div class="section-label">Profile</div>
+                        <h2>User Profile and Saved Results</h2>
+                        <p>The Profile module helps users review saved recommendation records, reopen result details, and remove outdated entries. It is well suited to a pair of screenshots showing the list page and the detail page.</p>
+                        <ol class="step-list">
+                            <li>Open the profile page to review saved history.</li>
+                            <li>Open a saved result for detailed inspection.</li>
+                            <li>Delete outdated records when needed.</li>
+                        </ol>
+                    </div>
+                    <div class="media-col">
+                        <div class="mini-grid">
+                            <div>
+                                <div class="media-slot">
+                                    <img src="{% static 'tutorial/profile_list.png' %}" alt="Profile saved list" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Profile List Screenshot</strong>
+                                        <span>Saved result list or profile dashboard view.</span>
+                                        <code>DrugX/static/tutorial/profile_list.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: the profile page or saved-result list showing multiple historical records.</div>
+                            </div>
+                            <div>
+                                <div class="media-slot">
+                                    <img src="{% static 'tutorial/profile_detail.png' %}" alt="Profile detail" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <div class="media-placeholder" style="display:none;">
+                                        <strong>Profile Detail Screenshot</strong>
+                                        <span>Saved result detail page.</span>
+                                        <code>DrugX/static/tutorial/profile_detail.png</code>
+                                    </div>
+                                </div>
+                                <div class="media-caption">Suggested content: a result detail page showing ranking output and detail operations.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-card">
+                <div class="section-label">Quick Start</div>
+                <h2>Suggested Demo Sequence</h2>
+                <p>This final block can remain text-only. It provides a concise order for platform demonstration or oral presentation.</p>
+                <div class="quick-grid">
+                    <div class="quick-card">
+                        <div class="num">1</div>
+                        <h3>Open Home</h3>
+                        <p>Introduce the platform and briefly explain the functional modules.</p>
+                    </div>
+                    <div class="quick-card">
+                        <div class="num">2</div>
+                        <h3>Run Recommend</h3>
+                        <p>Show patient-aware recommendation and explain the output fields.</p>
+                    </div>
+                    <div class="quick-card">
+                        <div class="num">3</div>
+                        <h3>Run Models</h3>
+                        <p>Demonstrate one or two prediction tasks and compare raw scores.</p>
+                    </div>
+                    <div class="quick-card">
+                        <div class="num">4</div>
+                        <h3>Show Explore + Data</h3>
+                        <p>End with structure exploration, complex rendering, and dataset browsing.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<script>
+function setupTutorialLoginButton() {
+    var button = document.getElementById('tutorialLoginBtn');
+    if (!button) {
+        return;
+    }
+
+    function goLogin() {
+        window.location.href = '/login.html';
+    }
+
+    function setSignedOut() {
+        button.textContent = 'Sign In';
+        button.onclick = goLogin;
+    }
+
+    setSignedOut();
+
+    fetch('/api/current-user/', {
+        credentials: 'same-origin',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    }).then(function(response) {
+        if (!response.ok) {
+            throw new Error('Current user request failed');
+        }
+        return response.json();
+    }).then(function(payload) {
+        var user = payload && payload.user;
+        var username = user && user.username;
+        if (!username) {
+            setSignedOut();
+            return;
+        }
+        sessionStorage.setItem('userName', username);
+        button.textContent = 'Sign Out';
+        button.onclick = function() {
+            fetch('/logout/', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            }).finally(function() {
+                sessionStorage.removeItem('userName');
+                sessionStorage.removeItem('loginTime');
+                window.location.href = '/tutorial.html';
+            });
+        };
+    }).catch(function() {
+        sessionStorage.removeItem('userName');
+        sessionStorage.removeItem('loginTime');
+        setSignedOut();
+    });
+}
+
+setupTutorialLoginButton();
+</script>
+</body>
+</html>
+
+
+
+
+
+

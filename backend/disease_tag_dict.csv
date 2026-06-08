@@ -1,0 +1,36 @@
+code,label,aliases,is_active,sort_order
+hypertension,高血压,"高血压,高血压病,hypertension",true,1
+diabetes,糖尿病,"糖尿病,diabetes,diabetes mellitus",true,2
+asthma,哮喘,"哮喘,asthma",true,3
+arthritis,关节炎,"关节炎,arthritis",true,4
+ulcer,消化性溃疡,"溃疡,胃溃疡,消化性溃疡,peptic ulcer,ulcer",true,5
+renal_impairment,肾功能受损,"肾功能受损,肾损伤,肾功能不全,renal impairment,kidney impairment",true,6
+liver_impairment,肝功能受损,"肝功能受损,肝损伤,肝功能不全,liver impairment,hepatic impairment",true,7
+bleeding,出血风险,"出血,出血风险,bleeding",true,8
+pregnancy,妊娠,"妊娠,怀孕,pregnancy",true,9
+heart_failure,心力衰竭,"心力衰竭,心衰,heart failure",true,10
+coronary_artery_disease,冠心病,"冠心病,冠状动脉疾病,coronary artery disease,CAD",true,11
+copd,慢阻肺,"慢阻肺,慢性阻塞性肺疾病,COPD,chronic obstructive pulmonary disease",true,12
+hyperkalemia,高钾血症,"高钾血症,hyperkalemia",true,13
+angioedema,血管性水肿,"血管性水肿,angioedema",true,14
+gastrointestinal_bleeding,胃肠道出血,"胃肠道出血,消化道出血,gastrointestinal bleeding,GI bleeding",true,15
+anxiety,焦虑障碍,"焦虑,焦虑障碍,anxiety",true,16
+depression,抑郁症,"抑郁,抑郁症,depression",true,17
+hypothyroidism,甲状腺功能减退,"甲减,甲状腺功能减退,hypothyroidism",true,18
+obesity,肥胖,"肥胖,obesity",true,19
+gout,痛风,"痛风,gout",true,20
+gerd,胃食管反流病,"胃食管反流病,反流性食管炎,GERD,gastroesophageal reflux disease",true,21
+atrial_fibrillation,房颤,"房颤,心房颤动,atrial fibrillation,AFib",true,22
+epilepsy,癫痫,"癫痫,epilepsy,seizure disorder",true,23
+osteoporosis,骨质疏松,"骨质疏松,osteoporosis",true,24
+glaucoma,青光眼,"青光眼,glaucoma",true,25
+hyperlipidemia,高脂血症,"高脂血症,高血脂,hyperlipidemia",true,26
+chronic_kidney_disease,慢性肾病,"慢性肾病,慢性肾脏病,CKD,chronic kidney disease",true,27
+migraine,偏头痛,"偏头痛,migraine",true,28
+allergic_rhinitis,过敏性鼻炎,"过敏性鼻炎,鼻炎,allergic rhinitis",true,29
+eczema,湿疹,"湿疹,eczema,atopic dermatitis",true,30
+benign_prostatic_hyperplasia,良性前列腺增生,"良性前列腺增生,前列腺增生,BPH,benign prostatic hyperplasia",true,31
+insomnia,失眠,"失眠,insomnia",true,32
+chronic_pain,慢性疼痛,"慢性疼痛,chronic pain",true,33
+anemia,贫血,"贫血,anemia",true,34
+

@@ -1,0 +1,129 @@
+{
+  "save_id": "demo_62_user_a_baseline",
+  "saved_at": "2026-05-16T09:20:00",
+  "user_name": "demo",
+  "demo_record": true,
+  "result_payload": {
+    "demo_record": true,
+    "demo_title": "6.2 User A baseline personalized reranking demo",
+    "demo_section": "6.2 Personalized reranking effect analysis",
+    "personalization_applied": false,
+    "task_type": "drug_repositioning",
+    "task_label": "Drug Repositioning",
+    "patient_profile": {
+      "age": null,
+      "sex": "unknown",
+      "disease_history": [],
+      "allergy_history": [],
+      "insurance_preference": "no"
+    },
+    "drug": [
+      {
+        "drugx_id": "3961",
+        "drug_name": "Losartan",
+        "iupac_name": "Losartan",
+        "smiles": "COC1=NC=NC2=C1N=CN2[C@H]3C[C@H](CO)O[C@@H]3CO",
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "Matched local personalization metadata."
+        }
+      },
+      {
+        "drugx_id": "5281040",
+        "drug_name": "Montelukast",
+        "iupac_name": "Montelukast",
+        "smiles": "CC(C)(O)C1=CC=C(C=C1)C(O)(CCCN2CCC(CC2)C3=CC=CC=C3)C4=CC=CC=C4",
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "Matched local personalization metadata."
+        }
+      },
+      {
+        "drugx_id": "3325",
+        "drug_name": "Famotidine",
+        "iupac_name": "Famotidine",
+        "smiles": "NC(=N)NC#NCCSC1=NC=C(CN=C(N)N)S1",
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "Matched local personalization metadata."
+        }
+      }
+    ],
+    "protein": [
+      {
+        "protein_id": "DEMO_TARGET_A",
+        "seq": "MALWMRLLPLLALLALWGPDPAAAFVNQHLCGSHLVEALYLVCGERGFFYTPKTR"
+      }
+    ],
+    "prob": [
+      {
+        "rank": 1,
+        "drug_name": "Losartan",
+        "protein_id": "DEMO_TARGET_A",
+        "pred_prob": 0.91
+      },
+      {
+        "rank": 2,
+        "drug_name": "Montelukast",
+        "protein_id": "DEMO_TARGET_A",
+        "pred_prob": 0.86
+      },
+      {
+        "rank": 3,
+        "drug_name": "Famotidine",
+        "protein_id": "DEMO_TARGET_A",
+        "pred_prob": 0.8
+      }
+    ],
+    "ranked_results": [
+      {
+        "personalized_rank": 1,
+        "original_rank": 1,
+        "drug_name": "Losartan",
+        "pubchem_cid": "3961",
+        "dti_score_raw": 0.91,
+        "dti_score_norm": 1.0,
+        "final_score": 0.91,
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "Matched local personalization metadata."
+        },
+        "recommendation_reason": "User A has no added disease or allergy conditions, so the ranking follows the original DTI prediction score."
+      },
+      {
+        "personalized_rank": 2,
+        "original_rank": 2,
+        "drug_name": "Montelukast",
+        "pubchem_cid": "5281040",
+        "dti_score_raw": 0.86,
+        "dti_score_norm": 0.545,
+        "final_score": 0.86,
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "Matched local personalization metadata."
+        },
+        "recommendation_reason": "No personalized adjustment is applied; this item keeps its original DTI rank."
+      },
+      {
+        "personalized_rank": 3,
+        "original_rank": 3,
+        "drug_name": "Famotidine",
+        "pubchem_cid": "3325",
+        "dti_score_raw": 0.8,
+        "dti_score_norm": 0.0,
+        "final_score": 0.8,
+        "metadata_status": {
+          "level": "full",
+          "label": "Complete information",
+          "message": "Matched local personalization metadata."
+        },
+        "recommendation_reason": "No personalized adjustment is applied; this item keeps its original DTI rank."
+      }
+    ]
+  }
+}

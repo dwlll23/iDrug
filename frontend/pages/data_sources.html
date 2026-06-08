@@ -1,0 +1,449 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDrug - Data Sources</title>
+    <link rel="shortcut icon" href="{% static 'Source/drugTitle.png' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+        <style>
+        body {
+            margin: 0;
+            background: #f4f7fb;
+            color: #243746;
+            font-family: "Microsoft YaHei", sans-serif;
+            overflow-x: hidden;
+        }
+        .hero-shell {
+            position: relative;
+            padding: 58px 0 34px;
+            background: radial-gradient(circle at top right, rgba(107, 143, 220, 0.16), transparent 34%), linear-gradient(180deg, #f8fbff 0%, #edf3fb 100%);
+            color: #22324a;
+            border-bottom: 1px solid rgba(219, 228, 241, 0.72);
+        }
+        .hero-inner, .page-shell {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+            box-sizing: border-box;
+        }
+        .hero-kicker {
+            display: inline-flex;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: #edf3fb;
+            border: 1px solid #dbe4f1;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6b7a90;
+        }
+        .hero-title {
+            margin: 18px 0 12px;
+            font-size: 36px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: #20364a;
+        }
+        .hero-text {
+            max-width: none; width: 100%;
+            margin: 0;
+            line-height: 1.9;
+            color: #637381;
+            font-size: 15px;
+        }
+        .page-shell {
+            padding: 28px 24px 56px;
+        }
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 260px minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+            width: 100%;
+        }
+        .nav-card, .panel-card {
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 16px 40px rgba(15, 42, 61, 0.08);
+            overflow: hidden;
+        }
+        .nav-card {
+            padding: 16px 0;
+            position: sticky;
+            top: 24px;
+            max-height: 820px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        .nav-group-title {
+            margin: 10px 24px 12px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #7d8a96;
+        }
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 52px;
+            margin: 0 12px 10px;
+            padding: 14px 16px;
+            border-radius: 16px;
+            box-sizing: border-box;
+            color: #314659;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+        .nav-item:hover { background: #eef4fb; }
+        .nav-item.active {
+            background: linear-gradient(90deg, #5d7dc2, #7d95d4);
+            color: #fff;
+            box-shadow: 0 14px 30px rgba(93, 125, 194, 0.25);
+        }
+        .panel-card {
+            width: 100%;
+            min-height: 820px;
+            padding: 26px 28px;
+            box-sizing: border-box;
+        }
+        .section-title {
+            margin: 0 0 10px;
+            font-size: 28px;
+            color: #20364a;
+        }
+        .section-text {
+            margin: 0;
+            color: #637381;
+            line-height: 1.85;
+        }
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 22px;
+            width: 100%;
+        }
+        .overview-card {
+            width: 100%;
+            min-height: 132px;
+            padding: 22px;
+            border-radius: 18px;
+            background: #f7fafc;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .overview-card.placeholder { visibility: hidden; pointer-events: none; }
+        .metric-label { color: #20364a; font-size: 20px; font-weight: 700; }
+        .metric-value { display: none; }
+        .metric-text { margin-top: 10px; color: #637381; line-height: 1.8; }
+        .detail-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: flex-start;
+            margin-bottom: 18px;
+        }
+        .detail-title { margin: 0 0 8px; font-size: 28px; color: #20364a; }
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .status-ready { background: #e8f5e9; color: #2e7d32; }
+        .status-empty { background: #fff8e1; color: #b7791f; }
+        .status-missing, .status-error { background: #fdecea; color: #c53030; }
+        .preview-box { margin-top: 18px; overflow-x: auto; }
+        .empty-box {
+            padding: 22px;
+            border-radius: 18px;
+            background: #f7fafc;
+            color: #637381;
+            text-align: center;
+            margin-top: 18px;
+        }
+        .table-note { margin-top: 14px; color: #7d8a96; font-size: 13px; }
+        .pager-row { display: flex; justify-content: flex-end; margin-top: 16px; }
+        .cell-truncate {
+            display: inline-block;
+            max-width: 280px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            vertical-align: bottom;
+        }
+        @media (max-width: 980px) {
+            .layout-grid, .overview-grid { grid-template-columns: 1fr; }
+            .nav-card { position: static; max-height: none; }
+            .hero-title { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+<div id="dataSourcesApp">
+    <header class="header_home">
+        <h2 class="Logo">iDrug</h2>
+        <nav class="navigation">
+            <a href="/home.html">Home</a>
+            <a href="/plat_DTI_input.html">Recommend</a>
+            <a href="/prediction_models.html">Models</a>
+            <a href="/Function.html">Explore</a>
+            <a href="/data_sources.html" class="active">Data</a>
+            <a href="/userInfo.html">Profile</a>
+            <a href="/tutorial.html">Tutorial</a>
+        </nav>
+        <div class="Login">
+            <el-button v-if="currentUserName !== 'Guest'" type="text" @click="userExit">Sign Out</el-button>
+            <el-button v-else type="text" @click="goLogin">Sign In</el-button>
+        </div>
+    </header>
+
+    <section class="hero-shell">
+        <div class="hero-inner">
+            <div class="hero-kicker">Data Sources</div>
+            <h1 class="hero-title">Dataset and Reference Overview</h1>
+            <p class="hero-text">Browse the core local datasets and external reference sources used by iDrug. This page focuses on structured data browsing rather than ad hoc search.</p>
+        </div>
+    </section>
+
+    <div class="page-shell">
+        <div class="layout-grid">
+            <aside class="nav-card">
+                <div class="nav-group-title">Sections</div>
+                <div class="nav-item" :class="{ active: selectedKey === 'overview' }" @click="selectedKey = 'overview'">
+                    <span>Overview</span>
+                </div>
+
+                <div class="nav-group-title">Core Local Datasets</div>
+                <div
+                    v-for="item in localSources"
+                    :key="item.key"
+                    class="nav-item"
+                    :class="{ active: selectedKey === item.key }"
+                    @click="selectedKey = item.key">
+                    <span>[[ item.title ]]</span>
+                </div>
+
+                <div class="nav-group-title">External Reference Sources</div>
+                <div
+                    v-for="item in externalSources"
+                    :key="item.key"
+                    class="nav-item"
+                    :class="{ active: selectedKey === item.key }"
+                    @click="selectedKey = item.key">
+                    <span>[[ item.title ]]</span>
+                </div>
+            </aside>
+
+            <section class="panel-card">
+                <template v-if="selectedKey === 'overview'">
+                    <h2 class="section-title">Overview</h2>
+                    <p class="section-text">A high-level summary of the local datasets and reference sources currently organized in the platform.</p>
+                    <div v-if="overview.length" class="overview-grid">
+                        <div v-for="item in overviewCards" :key="item.key" class="overview-card" :class="{ placeholder: item.placeholder }">
+                            <div class="metric-label">[[ item.title ]]</div>
+                            <div class="metric-text">[[ item.description ]]</div>
+                        </div>
+                    </div>
+                    <div v-else class="empty-box">No overview data is available yet.</div>
+                </template>
+
+                <template v-else-if="selectedItem">
+                    <div class="detail-top">
+                        <div>
+                            <h2 class="detail-title">[[ selectedItem.title ]]</h2>
+                            <p class="section-text">[[ selectedItem.description ]]</p>
+                        </div>
+                        <span class="status-pill" :class="statusClass(selectedItem.status)">[[ selectedItem.status ]]</span>
+                    </div>
+
+                    <div v-if="selectedItem.preview_rows !== undefined" class="preview-box">
+                        <el-table v-if="pagedRows.length" :data="pagedRows" stripe size="mini" style="width: 100%; margin-top: 12px;">
+                            <el-table-column
+                                v-for="field in displayFields(selectedItem)"
+                                :key="field"
+                                :label="field"
+                                min-width="150">
+                                <template slot-scope="scope">
+                                    <span :title="scope.row[field]">
+                                        [[ formatCell(scope.row[field], field) ]]
+                                    </span>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                        <div v-else class="empty-box">No preview rows are available for this item.</div>
+                        <div class="table-note" v-if="selectedItem.fields && selectedItem.fields.length">
+                            Fields included: [[ displayFields(selectedItem).join(', ') ]]
+                        </div>
+                        <div class="pager-row" v-if="selectedItem.preview_rows && selectedItem.preview_rows.length > pageSize">
+                            <el-pagination
+                                background
+                                layout="prev, pager, next"
+                                :page-size="pageSize"
+                                :current-page.sync="currentPage"
+                                :total="selectedItem.preview_rows.length">
+                            </el-pagination>
+                        </div>
+                    </div>
+                </template>
+
+                <template v-else>
+                    <div class="empty-box">No data source is selected.</div>
+                </template>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+new Vue({
+    el: '#dataSourcesApp',
+    delimiters: ['[[', ']]'],
+    data() {
+        return {
+            currentUserName: 'Guest',
+            generatedAt: '',
+            overview: [],
+            localSources: [],
+            externalSources: [],
+            selectedKey: 'overview',
+            currentPage: 1,
+            pageSize: 5
+        };
+    },
+    computed: {
+        selectedItem() {
+            return this.localSources.find(item => item.key === this.selectedKey)
+                || this.externalSources.find(item => item.key === this.selectedKey)
+                || null;
+        },
+        overviewCards() {
+            const cards = (this.overview || []).slice();
+            if (cards.length % 2 === 1) {
+                cards.push({
+                    key: '__overview_placeholder__',
+                    title: '',
+                    description: '',
+                    placeholder: true
+                });
+            }
+            return cards;
+        },
+        pagedRows() {
+            if (!this.selectedItem || !this.selectedItem.preview_rows) return [];
+            const start = (this.currentPage - 1) * this.pageSize;
+            return this.selectedItem.preview_rows.slice(start, start + this.pageSize);
+        }
+    },
+    watch: {
+        selectedKey() {
+            this.currentPage = 1;
+        }
+    },
+    created() {
+        this.loadCurrentUser();
+        this.loadSummary();
+    },
+    methods: {
+        loadCurrentUser() {
+            axios.get('/api/current-user/').then((response) => {
+                const user = (response.data && response.data.user) || {};
+                this.currentUserName = user.username || 'Guest';
+            }).catch(() => {
+                this.currentUserName = 'Guest';
+            });
+        },
+        loadSummary() {
+            axios.get('/api/data-sources/summary/').then((response) => {
+                const data = response.data || {};
+                this.generatedAt = data.generated_at || '';
+                this.overview = data.overview || [];
+                this.localSources = data.local_sources || [];
+                this.externalSources = data.external_sources || [];
+            }).catch(() => {
+                this.overview = [];
+                this.localSources = [];
+                this.externalSources = [];
+                this.$message.error('Failed to load data source summary.');
+            });
+        },
+        displayFields(item) {
+            const map = {
+                drug_structure_data: ['cid', 'drug_name', 'smiles', 'molecular_formula', 'molecular_weight'],
+                protein_structure_data: ['pdb_id', 'uniprot_id', 'protein_name', 'seq', 'keywords'],
+                personalized_metadata: ['pubchem_cid', 'drug_name', 'disease_tags', 'allergen_tags', 'contraindication_tags', 'caution_tags'],
+                disease_tags: ['code', 'label', 'aliases', 'is_active', 'sort_order'],
+                allergy_tags: ['code', 'label', 'aliases', 'is_active', 'sort_order']
+            };
+            if (map[item.key]) return map[item.key];
+            return (item.fields || []).slice(0, 5);
+        },
+        formatCell(value, field) {
+            const text = String(value == null ? '' : value);
+            const tagFields = ['disease_tags', 'allergen_tags', 'contraindication_tags', 'caution_tags'];
+            if (tagFields.includes(field)) {
+                const parts = text.split(',').map(part => part.trim()).filter(Boolean);
+                if (parts.length <= 2) return parts.join(', ');
+                return parts.slice(0, 2).join(', ') + ', ...';
+            }
+            if (field === 'seq') {
+                return text.length > 20 ? text.slice(0, 20) + '...' : text;
+            }
+            if (field === 'smiles') {
+                return text.length > 28 ? text.slice(0, 28) + '...' : text;
+            }
+            if (field === 'aliases' || field === 'description') {
+                return text.length > 32 ? text.slice(0, 32) + '...' : text;
+            }
+            return text;
+        },
+        statusClass(status) {
+            const value = String(status || '').toLowerCase();
+            if (value === 'ready' || value === 'available') return 'status-ready';
+            if (value === 'empty' || value === 'reference_only') return 'status-empty';
+            if (value === 'missing') return 'status-missing';
+            return 'status-error';
+        },
+        goLogin() {
+            window.location.href = '/login.html';
+        },
+        userExit() {
+            if (this.currentUserName === 'Guest') {
+                this.goLogin();
+                return;
+            }
+            axios.post('/logout/').finally(() => {
+                this.currentUserName = 'Guest';
+                window.location.href = '/home.html';
+            });
+        }
+    }
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
