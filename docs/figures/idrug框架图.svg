@@ -1,0 +1,77 @@
+<svg width="1800" height="850" viewBox="0 0 1800 850" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrowHead" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#6E9FD8"/>
+    </marker>
+  </defs>
+
+  <rect fill="#FFFFFF" x="0" y="0" width="1800" height="850"/>
+
+  <!-- 表现层 -->
+  <rect fill="#EAF3FF" stroke="#90CAF9" stroke-width="2" x="60" y="50" rx="24" ry="24" width="1680" height="170"/>
+  <text fill="#1E2B3C" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="42" font-weight="700" x="86" y="98">表现层（Frontend UI）</text>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="100"  y="115" rx="10" ry="10" width="120" height="88"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="260"  y="115" rx="10" ry="10" width="270" height="88"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="570"  y="115" rx="10" ry="10" width="180" height="88"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="790"  y="115" rx="10" ry="10" width="210" height="88"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="1040" y="115" rx="10" ry="10" width="120" height="88"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="1200" y="115" rx="10" ry="10" width="210" height="88"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="1450" y="115" rx="10" ry="10" width="250" height="88"/>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="160"  y="159">Home</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="395"  y="159">Recommend</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="660"  y="159">Models</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="895"  y="159">Explore</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="1100" y="159">Data</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="1305" y="159">Profile</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="1575" y="159">Tutorial</text>
+
+  <!-- 业务层 -->
+  <rect fill="#DCEBFF" stroke="#64B5F6" stroke-width="2" x="60" y="270" rx="24" ry="24" width="1680" height="270"/>
+  <text fill="#1E2B3C" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="42" font-weight="700" x="86" y="318">业务层（Backend Services）</text>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="100"  y="350" rx="12" ry="12" width="220" height="150"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="360"  y="350" rx="12" ry="12" width="360" height="150"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="760"  y="350" rx="12" ry="12" width="260" height="150"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="1060" y="350" rx="12" ry="12" width="260" height="150"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="1360" y="350" rx="12" ry="12" width="340" height="150"/>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="210"  y="425">接口与调度</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="540"  y="415">多场景DTI预测服务</text>
+  <text fill="#5B6B7E" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="22" font-weight="400" text-anchor="middle" dominant-baseline="middle" x="540" y="455">任务—模型匹配与统一调度</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="890"  y="425">个性化重排序引擎</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="1190" y="425">查询与可视化服务</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="1530" y="415">用户与结果管理</text>
+  <text fill="#5B6B7E" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="22" font-weight="400" text-anchor="middle" dominant-baseline="middle" x="1530" y="455">注册 / 登录 / 保存 / 删除</text>
+
+  <!-- 模型层 -->
+  <rect fill="#E6F7F5" stroke="#26A69A" stroke-width="2" x="60" y="590" rx="24" ry="24" width="840" height="200"/>
+  <text fill="#1E2B3C" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="42" font-weight="700" x="86" y="638">模型层（Model Layer）</text>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="100" y="670" rx="12" ry="12" width="360" height="92"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="500" y="670" rx="12" ry="12" width="160" height="92"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="700" y="670" rx="12" ry="12" width="160" height="92"/>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="280" y="716">HyperAttentionDTI</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="580" y="716">PSICHIC</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="780" y="716">DeepDTA</text>
+
+  <!-- 数据层 -->
+  <rect fill="#F3F6FA" stroke="#90A4AE" stroke-width="2" x="940" y="590" rx="24" ry="24" width="800" height="200"/>
+  <text fill="#1E2B3C" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="42" font-weight="700" x="966" y="638">数据层（Data Layer）</text>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="965"  y="670" rx="12" ry="12" width="274" height="92"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="1264" y="670" rx="12" ry="12" width="234" height="92"/>
+  <rect fill="#FFFFFF" stroke="#B8C7D9" stroke-width="1.8" x="1523" y="670" rx="12" ry="12" width="195" height="92"/>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="1102" y="716">本地结构化数据</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="1381" y="716">个性化元数据</text>
+  <text fill="#334155" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="31" font-weight="600" text-anchor="middle" dominant-baseline="middle" x="1620.5" y="716">业务数据库</text>
+  <text fill="#5B6B7E" font-family="Microsoft YaHei,PingFang SC,Noto Sans CJK SC,Arial,sans-serif" font-size="22" font-weight="400" text-anchor="middle" dominant-baseline="middle" x="1381" y="780">接入PubChem/PDB/DrugBank API</text>
+
+  <!-- 箭头连线 -->
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="160"  y1="203" x2="160"  y2="350"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="395"  y1="203" x2="540"  y2="350"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="660"  y1="203" x2="540"  y2="350"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="895"  y1="203" x2="1185" y2="350"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="1100" y1="203" x2="1190" y2="350"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="1305" y1="203" x2="1527" y2="350"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="1575" y1="203" x2="1530" y2="350"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="540"  y1="500" x2="275"  y2="590"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="890"  y1="500" x2="282"  y2="590"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="890"  y1="500" x2="1376" y2="590"/>
+  <line stroke="#6E9FD8" stroke-width="1.8" fill="none" marker-end="url(#arrowHead)" stroke-linecap="round" stroke-linejoin="round" x1="1190" y1="500" x2="1381" y2="590"/>
+</svg>
