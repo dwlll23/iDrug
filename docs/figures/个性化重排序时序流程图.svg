@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="670" viewBox="0 0 1180 670">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
+    <style>.title{font:700 26px 'Microsoft YaHei',Arial;fill:#0f172a}.head{fill:#e0f2fe;stroke:#0284c7;stroke-width:1.5}.box{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.2}.text{font:15px 'Microsoft YaHei',Arial;fill:#0f172a}.small{font:13px 'Microsoft YaHei',Arial;fill:#334155}.life{stroke:#94a3b8;stroke-width:1.2;stroke-dasharray:6 6}.arrow{stroke:#2563eb;stroke-width:1.8;marker-end:url(#arrow);fill:none}.return{stroke:#64748b;stroke-width:1.5;stroke-dasharray:5 5;marker-end:url(#arrow);fill:none}.note{fill:#eff6ff;stroke:#bfdbfe;stroke-width:1}</style>
+  </defs>
+  <rect width="1180" height="670" fill="#fff"/>
+  <g transform="translate(40,28)">
+    <rect class="head" x="0" y="0" width="150" height="46" rx="6"/><text class="text" x="75" y="29" text-anchor="middle">推荐页面</text><line class="life" x1="75" y1="46" x2="75" y2="570"/>
+    <rect class="head" x="185" y="0" width="170" height="46" rx="6"/><text class="text" x="270" y="29" text-anchor="middle">推荐 API</text><line class="life" x1="270" y1="46" x2="270" y2="570"/>
+    <rect class="head" x="390" y="0" width="165" height="46" rx="6"/><text class="text" x="472.5" y="29" text-anchor="middle">DTI 预测服务</text><line class="life" x1="472.5" y1="46" x2="472.5" y2="570"/>
+    <rect class="head" x="590" y="0" width="190" height="46" rx="6"/><text class="text" x="685" y="29" text-anchor="middle">个性化排序服务</text><line class="life" x1="685" y1="46" x2="685" y2="570"/>
+    <rect class="head" x="815" y="0" width="230" height="46" rx="6"/><text class="text" x="930" y="29" text-anchor="middle">知识库与用户数据</text><line class="life" x1="930" y1="46" x2="930" y2="570"/>
+    <line class="arrow" x1="75" y1="90" x2="270" y2="90"/><text class="small" x="172" y="78" text-anchor="middle">提交药物、靶点和用户画像</text>
+    <line class="arrow" x1="270" y1="132" x2="472.5" y2="132"/><text class="small" x="371" y="120" text-anchor="middle">获取基础 DTI 分数</text>
+    <line class="arrow" x1="472.5" y1="174" x2="270" y2="174"/><text class="small" x="371" y="162" text-anchor="middle">返回候选药物基础排名</text>
+    <line class="arrow" x1="270" y1="216" x2="685" y2="216"/><text class="small" x="478" y="204" text-anchor="middle">提交候选结果与用户画像</text>
+    <line class="arrow" x1="685" y1="258" x2="930" y2="258"/><text class="small" x="808" y="246" text-anchor="middle">读取疾病、过敏、医保和药物属性</text>
+    <line class="arrow" x1="930" y1="300" x2="685" y2="300"/><text class="small" x="808" y="288" text-anchor="middle">返回标签和元数据</text>
+    <rect class="note" x="585" y="326" width="360" height="78" rx="5"/><text class="small" x="604" y="350">综合评分：</text><text class="small" x="604" y="372">基础预测分数 + 疾病匹配加分</text><text class="small" x="604" y="394">- 风险惩罚 + 偏好权重</text>
+    <line class="arrow" x1="685" y1="430" x2="270" y2="430"/><text class="small" x="478" y="418" text-anchor="middle">返回重排序结果和推荐理由</text>
+    <line class="arrow" x1="270" y1="472" x2="75" y2="472"/><text class="small" x="172" y="460" text-anchor="middle">展示排名、分数和解释信息</text>
+    <line class="arrow" x1="75" y1="520" x2="270" y2="520"/><text class="small" x="172" y="508" text-anchor="middle">可选：保存推荐结果</text>
+    <line class="arrow" x1="270" y1="562" x2="930" y2="562"/><text class="small" x="600" y="550" text-anchor="middle">按当前用户写入历史记录</text>
+  </g>
+</svg>
