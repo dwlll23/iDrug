@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="720" viewBox="0 0 1180 720">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#0f766e"/></marker>
+    <style>.title{font:700 26px 'Microsoft YaHei',Arial;fill:#0f172a}.head{fill:#ccfbf1;stroke:#0f766e;stroke-width:1.5}.text{font:15px 'Microsoft YaHei',Arial;fill:#0f172a}.small{font:13px 'Microsoft YaHei',Arial;fill:#334155}.life{stroke:#94a3b8;stroke-width:1.2;stroke-dasharray:6 6}.arrow{stroke:#0f766e;stroke-width:1.8;marker-end:url(#arrow);fill:none}.note{fill:#f0fdfa;stroke:#99f6e4;stroke-width:1}</style>
+  </defs>
+  <rect width="1180" height="720" fill="#fff"/>
+  <text x="590" y="44" text-anchor="middle" class="title">图3-5 数据浏览时序图</text>
+  <g transform="translate(55,78)">
+    <rect class="head" x="0" y="0" width="145" height="46" rx="6"/><text class="text" x="72.5" y="29" text-anchor="middle">数据浏览页</text><line class="life" x1="72.5" y1="46" x2="72.5" y2="570"/>
+    <rect class="head" x="180" y="0" width="170" height="46" rx="6"/><text class="text" x="265" y="29" text-anchor="middle">Data API</text><line class="life" x1="265" y1="46" x2="265" y2="570"/>
+    <rect class="head" x="385" y="0" width="190" height="46" rx="6"/><text class="text" x="480" y="29" text-anchor="middle">数据源服务</text><line class="life" x1="480" y1="46" x2="480" y2="570"/>
+    <rect class="head" x="610" y="0" width="170" height="46" rx="6"/><text class="text" x="695" y="29" text-anchor="middle">本地数据目录</text><line class="life" x1="695" y1="46" x2="695" y2="570"/>
+    <rect class="head" x="815" y="0" width="220" height="46" rx="6"/><text class="text" x="925" y="29" text-anchor="middle">CSV / JSON 解析器</text><line class="life" x1="925" y1="46" x2="925" y2="570"/>
+    <line class="arrow" x1="72.5" y1="90" x2="265" y2="90"/><text class="small" x="169" y="78" text-anchor="middle">选择数据源、页码和分页大小</text>
+    <line class="arrow" x1="265" y1="132" x2="480" y2="132"/><text class="small" x="373" y="120" text-anchor="middle">browseDataSource(sourceName, page)</text>
+    <line class="arrow" x1="480" y1="174" x2="695" y2="174"/><text class="small" x="588" y="162" text-anchor="middle">定位文件路径和数据说明</text>
+    <line class="arrow" x1="695" y1="216" x2="480" y2="216"/><text class="small" x="588" y="204" text-anchor="middle">返回文件存在状态和元信息</text>
+    <line class="arrow" x1="480" y1="258" x2="925" y2="258"/><text class="small" x="703" y="246" text-anchor="middle">读取样例行、字段名和统计摘要</text>
+    <line class="arrow" x1="925" y1="300" x2="480" y2="300"/><text class="small" x="703" y="288" text-anchor="middle">返回预览数据与分页结果</text>
+    <rect class="note" x="530" y="326" width="390" height="62" rx="5"/><text class="small" x="545" y="350">数据源缺失时返回明确提示</text><text class="small" x="545" y="371">不影响其他数据源继续浏览</text>
+    <line class="arrow" x1="480" y1="411" x2="265" y2="411"/><text class="small" x="373" y="399" text-anchor="middle">封装字段说明、总量摘要、当前页数据</text>
+    <line class="arrow" x1="265" y1="453" x2="72.5" y2="453"/><text class="small" x="169" y="441" text-anchor="middle">返回 JSON 数据源摘要</text>
+    <line class="arrow" x1="72.5" y1="505" x2="72.5" y2="505"/><text class="small" x="92" y="496">渲染表格、分页控件和数据用途说明</text>
+  </g>
+</svg>
