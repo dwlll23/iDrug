@@ -1,0 +1,33 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="760" viewBox="0 0 1180 760">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/></marker>
+    <style>
+      .title{font:700 26px 'Microsoft YaHei',Arial;fill:#0f172a}.head{fill:#e0f2fe;stroke:#0284c7;stroke-width:1.5}.box{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.2}.text{font:15px 'Microsoft YaHei',Arial;fill:#0f172a}.small{font:13px 'Microsoft YaHei',Arial;fill:#334155}.life{stroke:#94a3b8;stroke-width:1.2;stroke-dasharray:6 6}.arrow{stroke:#2563eb;stroke-width:1.8;marker-end:url(#arrow);fill:none}.return{stroke:#64748b;stroke-width:1.5;stroke-dasharray:5 5;marker-end:url(#arrow);fill:none}
+    </style>
+  </defs>
+  <rect width="1180" height="760" fill="#ffffff"/>
+  <text x="590" y="44" text-anchor="middle" class="title">图3-1 iDrug 系统整体时序图</text>
+  <g transform="translate(35,80)">
+    <g>
+      <rect class="head" x="0" y="0" width="135" height="46" rx="6"/><text class="text" x="67.5" y="29" text-anchor="middle">平台用户</text><line class="life" x1="67.5" y1="46" x2="67.5" y2="620"/>
+      <rect class="head" x="160" y="0" width="145" height="46" rx="6"/><text class="text" x="232.5" y="29" text-anchor="middle">前端页面</text><line class="life" x1="232.5" y1="46" x2="232.5" y2="620"/>
+      <rect class="head" x="330" y="0" width="160" height="46" rx="6"/><text class="text" x="410" y="29" text-anchor="middle">Django API</text><line class="life" x1="410" y1="46" x2="410" y2="620"/>
+      <rect class="head" x="520" y="0" width="160" height="46" rx="6"/><text class="text" x="600" y="29" text-anchor="middle">业务服务层</text><line class="life" x1="600" y1="46" x2="600" y2="620"/>
+      <rect class="head" x="710" y="0" width="165" height="46" rx="6"/><text class="text" x="792.5" y="29" text-anchor="middle">模型推理环境</text><line class="life" x1="792.5" y1="46" x2="792.5" y2="620"/>
+      <rect class="head" x="905" y="0" width="170" height="46" rx="6"/><text class="text" x="990" y="29" text-anchor="middle">数据与外部接口</text><line class="life" x1="990" y1="46" x2="990" y2="620"/>
+    </g>
+    <line class="arrow" x1="67.5" y1="86" x2="232.5" y2="86"/><text class="small" x="150" y="75" text-anchor="middle">访问首页/功能页面</text>
+    <line class="arrow" x1="232.5" y1="126" x2="410" y2="126"/><text class="small" x="321" y="115" text-anchor="middle">提交预测、推荐或查询请求</text>
+    <line class="arrow" x1="410" y1="166" x2="600" y2="166"/><text class="small" x="505" y="155" text-anchor="middle">校验输入与会话</text>
+    <line class="arrow" x1="600" y1="206" x2="792.5" y2="206"/><text class="small" x="696" y="195" text-anchor="middle">按任务调度模型</text>
+    <line class="arrow" x1="600" y1="246" x2="990" y2="246"/><text class="small" x="795" y="235" text-anchor="middle">读取 MySQL、本地知识库、缓存</text>
+    <line class="arrow" x1="990" y1="286" x2="600" y2="286"/><text class="small" x="795" y="275" text-anchor="middle">返回结构化数据</text>
+    <line class="arrow" x1="792.5" y1="326" x2="600" y2="326"/><text class="small" x="696" y="315" text-anchor="middle">返回模型推理结果</text>
+    <line class="arrow" x1="600" y1="366" x2="410" y2="366"/><text class="small" x="505" y="355" text-anchor="middle">封装 JSON 结果</text>
+    <line class="arrow" x1="410" y1="406" x2="232.5" y2="406"/><text class="small" x="321" y="395" text-anchor="middle">返回页面数据</text>
+    <line class="arrow" x1="232.5" y1="446" x2="67.5" y2="446"/><text class="small" x="150" y="435" text-anchor="middle">展示预测、排序、结构或历史记录</text>
+    <line class="arrow" x1="67.5" y1="506" x2="232.5" y2="506"/><text class="small" x="150" y="495" text-anchor="middle">保存或删除结果</text>
+    <line class="arrow" x1="232.5" y1="546" x2="410" y2="546"/><text class="small" x="321" y="535" text-anchor="middle">结果管理请求</text>
+    <line class="arrow" x1="410" y1="586" x2="990" y2="586"/><text class="small" x="700" y="575" text-anchor="middle">写入或删除用户历史记录</text>
+  </g>
+</svg>
